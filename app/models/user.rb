@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
      existing_user = self.where(email: auth.info.email).first
      existing_user.provider = auth.provider
      existing_user.uid = auth.uid
+     existing_user.remote_picture_url = auth.info.image if existing_user.picture.blank?
     else
       existing_user = self.where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
         user.email = auth.info.email
