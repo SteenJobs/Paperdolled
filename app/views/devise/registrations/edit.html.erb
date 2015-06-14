@@ -36,6 +36,8 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
+	
+	<%= f.hidden_field :bio, :value => resource.bio.blank? ? "Describe yourself!" : resource.bio %>
 
 <div class="row">
 		<div class="col-md-12">

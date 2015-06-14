@@ -100,18 +100,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			     <ul id="myList">
 			        <!-- These are our grid blocks -->
 			        <li>
+								<% @users.each do |user| %>
 						<div class="l_g">
 							<div class="col-md-3 praesent">
 								<div class="l_g_r">
 									<div class="dapibus">
-										<h2>Praesent dapibusneque id cursus faucioibus tortor neque tiegetas augue</h2>
+										<h2><%= user.first_name + " " + user.last_name %></h2>
 										<p class="adm">Posted by <a href="#">Admin</a>  |  7 days ago</p>
-										<a href="details.html"><img src="images/img1.jpg" class="img-responsive" alt=""></a>
-										<p>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate. </p>
-										<a href="details.html" class="link">Read More</a>
+										<a href="details.html"><img src="<%= user.picture %>"  class="img-responsive" alt=""></a>
+										<p><%= user.bio %></p>
+										<%= link_to "View Profile", user_path(user), class: "link" %>
+										
 									</div>
 								</div>
 							</div>
+							<% end %>
+			
+					
+<!--							
 							<div class="col-md-3 integ">
 								<div class="l_g_r">
 									<div class="integer">
@@ -123,6 +129,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>
 								</div>
 							</div>
+							
 							<div class="col-md-3 integ">
 								<div class="l_g_r">
 									<div class="dapibus">
@@ -134,6 +141,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>
 								</div>
 							</div>
+-->
+							
 							<div class="col-md-3 integ">
 								<div class="l_g_r">
 									<div class="posts">
