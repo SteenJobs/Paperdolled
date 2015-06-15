@@ -40,7 +40,11 @@ class RegistrationsController < Devise::RegistrationsController
         resource.update_with_password(params)
       else
         params.delete(:current_password)
-        params[:bio] = @bio if @bio.present?
+        if !@bio.nil? && @bio.blank?
+          params[:bio] = "Too cool to have a bio"
+        else
+          params[:bio] = @bio 
+        end
         resource.update_without_password(params)
       end
     end

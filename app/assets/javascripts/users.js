@@ -7,11 +7,11 @@ $(document).ready(function () {
     x=3;
     $('#myList li:lt('+x+')').show();
     $('#loadMore').click(function () {
-        x= (x+1 <= size_li) ? x+1 : size_li;
+        x= (x+1 <= size_li) ? x+2 : size_li;
         $('#myList li:lt('+x+')').show();
     });
     $('#showLess').click(function () {
-        x=(x-1<0) ? 1 : x-1;
+        x=(x-1<0) ? 1 : x-2;
         $('#myList li').not(':lt('+x+')').hide();
     });
 });

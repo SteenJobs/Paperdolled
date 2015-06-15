@@ -38,6 +38,11 @@ class User < ActiveRecord::Base
     end
   end
   
+  # Returns search query
+  def self.search(params)
+    where("(UPPER(first_name) LIKE ?) OR (UPPER(last_name) LIKE ?)", "%#{params.upcase}%", "%#{params.upcase}%") 
+  end
+  
   private
   
   # Validates the size of an uploaded picture.

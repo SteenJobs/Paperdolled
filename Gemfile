@@ -26,7 +26,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Additional Gems
 gem 'devise'
 gem 'cancancan'
-gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'bootstrap-sass'
@@ -57,6 +56,8 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'faker'
+  gem 'populator'
 end
   
 group :test do

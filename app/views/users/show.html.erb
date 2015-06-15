@@ -31,12 +31,12 @@
 		<label>Bio</label><br />
 			<div class="row">
 				<div class="col-md-3">
-					<span class="rest-in-place" data-attribute="bio" data-url="<%= registration_path(@user) %>" data-formtype="textarea"><%= @user.bio %></span>
+					<span class="rest-in-place" data-attribute="bio" data-url="<%= registration_path(@user) %>" data-formtype="textarea"><%= @user.bio.presence || "Placeholder" %></span>
 				</div>
 			</div>
 	</div>
 
-
+			
 	
 		
 			<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put, :multipart => true}) do |f| %>
