@@ -5,7 +5,8 @@
 	<div class="container">
 		<div class="header">
 			<div class="logo">
-				<a href="index.html"><img src="images/logo.png" class="img-responsive" alt="" /></a>
+				<br>
+				<h2><strong>PaperDolled</strong></h2>
 			</div>
 			<div class="header-right">
 				<ul>
@@ -69,7 +70,7 @@
 											<div class="dapibus">
 												<h2><%= user.first_name + " " + user.last_name %></h2>
 												<p class="adm">Last updated on <%= user.updated_at.localtime.strftime('%A, %B %d') %></p>
-												<a href="details.html"><img src="<%= user.picture %>"  class="img-responsive" alt=""></a>
+												<%= link_to image_tag(user.picture), user_path(user), class: "img-responsive" %>
 												<p><%= user.bio %></p>
 												<%= link_to "View Profile", user_path(user), class: "link" %>
 										
