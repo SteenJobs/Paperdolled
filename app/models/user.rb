@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:facebook]
          
   mount_uploader :picture, PictureUploader
+  
+  has_many :scenarios
          
   validates :first_name,  presence: true
   validates :last_name,  presence: true
@@ -42,6 +44,7 @@ class User < ActiveRecord::Base
   def self.search(params)
     where("(UPPER(first_name) LIKE ?) OR (UPPER(last_name) LIKE ?)", "%#{params.upcase}%", "%#{params.upcase}%") 
   end
+
   
   private
   

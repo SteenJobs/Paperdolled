@@ -11,6 +11,31 @@ img {
 .navbar-brand {
   font-size: inherit;
   }
+	
+// navbar
+.navbar {
+	margin-bottom: 0px;
+}
+
+div.header {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+div.header-right {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+div.head-nav {
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
+
+// main
+div.container-fluid {
+	padding-top: 30px;
+}
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create your own classes
@@ -38,7 +63,9 @@ main {
   background-color: #eee;
   padding-bottom: 80px;
   width: 100%;
-  margin-top: 51px; // accommodate the navbar
+	padding-right: 0px;
+	padding-left: 0px;
+  // margin-top: 51px; // accommodate the navbar
   }
 section {
   @extend .row;
@@ -93,6 +120,7 @@ $gray-medium-light: #eaeaea;
 
 /* miscellaneous */
 
+
 .debug_dump {
   clear: both;
   float: left;
@@ -103,6 +131,7 @@ $gray-medium-light: #eaeaea;
 
 .field_with_errors { display: inline; }
 
-main {
+/* main {
   padding-top: 30px;
 }
+*/

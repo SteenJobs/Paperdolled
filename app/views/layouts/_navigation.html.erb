@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-static-top">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -14,5 +14,58 @@
         <%= render 'layouts/navigation_links' %>
       </ul>
     </div>
+	</div>
+		<div class="banner">
+			<div class="container">
+				<div class="header">
+					<div class="logo">
+						<br>
+						<h2><strong>PaperDolled</strong></h2>
+					</div>
+					<div class="header-right">
+						<ul>
+							<div class="row">
+								<div class="col-md-6">
+									<li><a href="#"><i class="fb"> </i></a></li>
+									<li><a href="#"><i class="twt"> </i></a></li>
+								</div>
+								<div class="col-md-offset-8">
+									<li>
+										<%= form_tag users_path, method: :get, id: "search-form" do %>
+										<div class="input-group" >
+									  	<%= text_field_tag :query, params[:query], placeholder: "Search for...", class: "form-control style-2" %>
+											<span class="input-group-btn">
+												<button class="btn btn-default" type="button">Go!</button>
+								  		</span>
+		            		</div><!-- /input-group -->
+						  			<% end %>
+									</li>
+								</div>
+					
+							</div>
+								<div class="clearfix"></div>
+						</ul>
+					
+					</div>
+						<div class="clearfix"> </div>
+					</div>
+			
+					<div class="head-nav">
+						<span class="menu"> </span>
+							<ul class="cl-effect-15">
+							<li class="active"><a href="index.html">HOME</a></li>
+								<li><a href="about.html" data-hover="ABOUT">ABOUT</a></li>
+								<li><a href="clothing.html" data-hover="CLOTHING">CLOTHING</a></li>
+								<li><a href="404.html" data-hover="ARCHIVES">ARCHIVES</a></li>
+								<li><a href="contact.html" data-hover="CONTACT">CONTACT</a></li>
+									<div class="clearfix"> </div>
+							</ul>
+					</div>		 
+		
+		</div>
+	</div>
+
+		<!-- header -->
+		
   </div>
 </nav>

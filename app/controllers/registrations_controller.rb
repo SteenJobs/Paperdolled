@@ -2,7 +2,7 @@ class RegistrationsController < Devise::RegistrationsController
   respond_to :json, :html
   
   def update
-    @bio = params[:undefined][:bio] if !params[:undefined].nil?
+    # @bio = params[:undefined][:bio] if !params[:undefined].nil?
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
 
@@ -18,7 +18,7 @@ class RegistrationsController < Devise::RegistrationsController
      if !@bio.nil?
        respond_to do |format|
          format.html 
-         format.json {render :json => @user}
+         format.json {respond_with_bip(resource)}
        end
      else
      respond_with resource, location: after_update_path_for(resource)
@@ -40,11 +40,11 @@ class RegistrationsController < Devise::RegistrationsController
         resource.update_with_password(params)
       else
         params.delete(:current_password)
-        if !@bio.nil? && @bio.blank?
-          params[:bio] = "Too cool to have a bio"
-        else
-          params[:bio] = @bio 
-        end
+        # if !@bio.nil? && @bio.blank?
+        #   params[:bio] = "Too cool to have a bio"
+        # else
+        #   params[:bio] = @bio 
+        # end
         resource.update_without_password(params)
       end
     end

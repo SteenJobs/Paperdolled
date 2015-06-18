@@ -1,66 +1,104 @@
-<% provide(:title, "Profile") %>
-
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-4">
-			<%= @user.first_name + " " + @user.last_name %>
-		</div>
-	</div>
-	
-	<br>
-	
-	<div class="row">
-		<div class="col-md-4">
-			<%= @user.email %>
-		</div>
-	</div>
-	
-	<br>
-	
-	<div class="row">
-		<div class="col-md-12">
-			<div class="pull-left">
-			<%= image_tag @user.picture.url if @user.picture? %>
+<!-- header -->
+	<div class="details">
+		<div class="container">
+			<div class="det_pic">
+				  <%= image_tag(@user.picture) if @user.picture? %>
 			</div>
-		</div>
-	</div>
-		
-	<br>
-
-	<div class="form-group">
-		<label>Bio</label><br />
-			<div class="row">
-				<div class="col-md-3">
-					<span class="rest-in-place" data-attribute="bio" data-url="<%= registration_path(@user) %>" data-formtype="textarea"><%= @user.bio.presence || "Placeholder" %></span>
+			<div class="det_text">
+				<!-- Fix this hack -->
+				<% if @user.bio.blank? %>
+					<% @user.update_attributes!(bio: "click me to edit") %>
+				<% end %>
+				<%= best_in_place @user, :bio, url: registration_path(@user), as: :textarea, place_holder: "click me to edit", html_attrs: {cols: 80, rows: 10}, :display_with => lambda{ |v| simple_format(v) } %>
+			</div>
+			 <div class="comments1">
+								<h4>COMMENTS</h4>
+			  				<div class="comments-main">
+									<div class="col-md-2 cmts-main-left">
+										<img src="images/avatar.png" alt="">
+									</div>
+									<div class="col-md-10 cmts-main-right">
+										<h5>TOM BROWN</h5>
+										<p>Vivamus congue turpis in augue pellentesque scelerisque. Pellentesque aliquam laoreet sem nec ultrices. Fusce blandit nunc vehicula massa vehicula tincidunt. Nam venenatis cursus urna sed gravida. Ut tincidunt elit ut quam malesuada consequat. Sed semper purus sit amet lorem elementum faucibus.</p>
+										<div class="cmts">
+											<div class="cmnts-left">
+												<p>On April 14, 2014, 18:01</p>
+											</div>
+											<div class="cmnts-right">
+												<a href="#">Reply</a>
+											</div>
+											<div class="clearfix"></div>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+			  				</div>
+			<div class="lev">
+			<div class="leave">
+				<h4>Leave a comment</h4>
 				</div>
-			</div>
+				<form id="commentform">
+				    <label for="author">Name</label>
+						<input id="author" name="author" type="text" value="" size="30" aria-required="true">
+						<label for="email">Email</label>
+						<input id="email" name="email" type="text" value="" size="30" aria-required="true">
+						<label for="url">Website</label>
+						<input id="url" name="url" type="text" value="" size="30">
+						<label for="comment">Comment</label>
+						<textarea></textarea>
+					 <div class="clearfix"></div>
+			           <input name="submit" type="submit" id="submit" value="Send">
+					<div class="clearfix"></div>
+				   </form>
+				  </div>
+				  
+		</div>
 	</div>
-
-			
 	
-		
-			<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put, :multipart => true}) do |f| %>
-				<%= devise_error_messages! %><!--Check to make sure this works-->
-					
-				  <div class="form-group">
-						<label><%= f.label :picture %></label><br />
-						<%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
-						<%= f.hidden_field :picture_cache %>
-					</div>
-					
-					<div class="form-group">
-				    <%= f.submit "Update", class: "btn btn-primary" %>
-					</div>
-					
-			<% end %>
-	
-			<script type="text/javascript">
-			  $('#picture').bind('change', function() {
-			    var size_in_megabytes = this.files[0].size/1024/1024;
-			    if (size_in_megabytes > 5) {
-			      alert('Maximum file size is 5MB. Please choose a smaller file.');
-			    }
-			  });
-			</script>
-	
-</div>
+<!-- footer -->
+	<div class="footer">
+		<div class="container">
+			<div class="col-md-3 copy">
+				<div class="top1">
+					<i class="ham"></i>
+				</div>
+				<div class="top2">
+					<h6>Copyrights © 2015 Graphic</h6>
+					<p>All rights reserved</p>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="col-md-3 copy">
+				<div class="top1">
+					<i class="men"></i>
+				</div>
+				<div class="top2">
+					<h6>Template by: </h6>
+					<p><a href="http://w3layouts.com/">W3layouts</a></p>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="col-md-3 copy">
+				<div class="top1">
+					<i class="app"></i>
+				</div>
+				<div class="top2">
+					<h6>Images From: </h6>
+					<p><a href="#"> www.wallcoo.net</a></p>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="col-md-3 copy">
+				<div class="top1">
+					<i class="lik"></i>
+				</div>
+				<div class="top2">
+					<h6>Website </h6>
+					<p><a href="#"> www.yourblog.com</a></p>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+<!-- footer -->

@@ -11,6 +11,5 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @bios = @user.bio.blank? ? "Describe yourself!" : @user.bio
   end
 end

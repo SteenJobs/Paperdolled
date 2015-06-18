@@ -13,7 +13,8 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require best_in_place
+//= require chosen-jquery
 //= require turbolinks
-//= require 'rest_in_place'
 //= require bootstrap-sprockets
 //= require_tree .

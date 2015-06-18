@@ -16,10 +16,21 @@ $(document).ready(function () {
     });
 });
 
-//<!-- script-for-nav -->
+// script-for-nav 
+$(document).ready(function () {
 		$( "span.menu" ).click(function() {
 		  $( ".head-nav ul" ).slideToggle(300, function() {
 			// Animation complete.
 		  });
 		});
-// <!-- script-for-nav --> 	
+	});
+	
+// script-for-textarea
+	
+$(document).ready(function() {
+  /* Activating Best In Place */
+  jQuery(".best_in_place").best_in_place();
+	$('.best_in_place').bind('ajax:success', function(){ this.innerHTML = this.innerHTML.replace(/\n/g, '<br />') });
+	$('#questions').find('select').chosen();
+});
+
