@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   validates :first_name,  presence: true
   validates :last_name,  presence: true
   validate  :picture_size
+  
          
          
   def self.from_omniauth(auth)
@@ -44,6 +45,16 @@ class User < ActiveRecord::Base
   def self.search(params)
     where("(UPPER(first_name) LIKE ?) OR (UPPER(last_name) LIKE ?)", "%#{params.upcase}%", "%#{params.upcase}%") 
   end
+
+  # Find user responses for scenarios
+  def self.list_answers(user)
+	  user.scenarios.limit(2).reverse.map do |scenario| 
+		  scenario.answers.map do |answer|
+        options = Option.all.find_by(id: answer.option_id)
+        responses = options.possible_response if !options.nil?
+      end
+		end
+  end 
 
   
   private

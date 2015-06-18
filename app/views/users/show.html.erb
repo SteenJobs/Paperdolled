@@ -1,16 +1,42 @@
 <!-- header -->
 	<div class="details">
 		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					
+				<%= render 'answers' %>
+	
+			</div>
+			</div>
+			
+			<div class="row" id="profile">
 			<div class="det_pic">
 				  <%= image_tag(@user.picture) if @user.picture? %>
 			</div>
+		</div>
 			<div class="det_text">
 				<!-- Fix this hack -->
 				<% if @user.bio.blank? %>
 					<% @user.update_attributes!(bio: "click me to edit") %>
 				<% end %>
-				<%= best_in_place @user, :bio, url: registration_path(@user), as: :textarea, place_holder: "click me to edit", html_attrs: {cols: 80, rows: 10}, :display_with => lambda{ |v| simple_format(v) } %>
+				<%= best_in_place @user, :bio, url: registration_path(@user), as: :textarea, place_holder: "click me to edit", sanitize: true, html_attrs: {cols: 80, rows: 10}, :display_with => lambda{ |v| simple_format(v).html_safe } %>
 			</div>
+			
+			<div class="row" id="scenario">	
+				<% User.list_answers(current_user).each do |scenario| %>
+					<div class="col-md-4 well each_scenario">
+						<ul>
+							<% scenario.each do |answer| %>
+							<li>
+								<%= answer %>
+							</li>
+							<% end %>
+						</ul>
+					</div>
+				<% end %>
+			</div>
+					
+					
 			 <div class="comments1">
 								<h4>COMMENTS</h4>
 			  				<div class="comments-main">
@@ -33,6 +59,9 @@
 									<div class="clearfix"></div>
 								</div>
 			  				</div>
+								
+								
+								
 			<div class="lev">
 			<div class="leave">
 				<h4>Leave a comment</h4>

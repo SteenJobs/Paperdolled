@@ -11,5 +11,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @answer = Answer.new
+    @options = Option.all
   end
 end

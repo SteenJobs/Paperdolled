@@ -1,3 +1,28 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#questions form > li {
+	display: inline-block;
+	padding-left: 10px;
+}
+
+div.chosen-container.chosen-container-single {
+	width: 150px !important;
+}
+
+#profile {
+	margin-top: 20px;
+}
+
+ul#questions {
+	padding-left: 0;
+}
+
+.each_scenario {
+	height: 180px;
+}
+
+.row {
+	margin-top: 20px;
+}

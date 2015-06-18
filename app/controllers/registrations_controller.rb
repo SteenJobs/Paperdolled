@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   respond_to :json, :html
+  before_filter :fix_lines
   
   def update
     # @bio = params[:undefined][:bio] if !params[:undefined].nil?
@@ -29,6 +30,12 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
     
+  def fix_lines
+    puts "is this working"
+    user = params[:user][:bio]
+    params[:user][:bio] = user.gsub(/\n/, '<br>')
+  end  
+    
   protected
   
     def after_update_path_for(resource)
@@ -48,4 +55,5 @@ class RegistrationsController < Devise::RegistrationsController
         resource.update_without_password(params)
       end
     end
+      
 end
