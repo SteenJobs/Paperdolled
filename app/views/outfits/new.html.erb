@@ -1,0 +1,35 @@
+<div class="container" id="outfit_container">
+
+<div class="row">
+	<div class="col-md-7">
+	<div id="outfit_canvas">
+	</div>
+</div>
+
+
+
+
+	<div class="col-md-5 well">
+		
+			<% @item.each do |item| %>
+			<div class="col-md-4">
+			<div class="draggable">
+				<%= image_tag item.picture %>
+    	<div class="ui-resizable-handle ui-resizable-nw" id="nwgrip"></div>
+    	<div class="ui-resizable-handle ui-resizable-ne" id="negrip"></div>
+    	<div class="ui-resizable-handle ui-resizable-sw" id="swgrip"></div>
+    	<div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
+    	<div class="ui-resizable-handle ui-resizable-n" id="ngrip"></div>
+    	<div class="ui-resizable-handle ui-resizable-s" id="sgrip"></div>
+    	<div class="ui-resizable-handle ui-resizable-e" id="egrip"></div>
+    	<div class="ui-resizable-handle ui-resizable-w" id="wgrip"></div>
+		</div>
+			<div class="text-center">
+				<%= link_to item.name, item.link %>
+				<%= item.price %>
+			</div>
+		</div>
+			<% end %>
+		</div>
+	</div>
+</div>

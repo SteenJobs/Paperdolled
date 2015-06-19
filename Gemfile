@@ -40,6 +40,7 @@ gem 'chosen-rails'
 gem "compass-rails", git: 'https://github.com/Compass/compass-rails', branch: 'master'
 gem 'redactor-rails'
 gem 'bootstrap-datepicker-rails'
+gem 'jquery-ui-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
