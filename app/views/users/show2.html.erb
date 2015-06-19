@@ -63,3 +63,12 @@
 			</script>
 	
 </div>
+
+
+				<!-- Fix this hack -->
+				<!--
+				<% if @user.bio.blank? %>
+					<% @user.update_attributes!(bio: "click me to edit") %>
+				<% end %>
+				
+				<%= best_in_place @user, :bio, url: registration_path(@user), as: :textarea, place_holder: "click me to edit", sanitize: true, html_attrs: { class: 'redactor', cols: 80, rows: 10}, :display_with => lambda{ |v| simple_format(v).html_safe } %> -->

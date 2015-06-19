@@ -8,7 +8,9 @@ class User < ActiveRecord::Base
   mount_uploader :picture, PictureUploader
   
   has_many :scenarios
-         
+  
+
+                
   validates :first_name,  presence: true
   validates :last_name,  presence: true
   validate  :picture_size
@@ -55,6 +57,7 @@ class User < ActiveRecord::Base
       end
 		end
   end 
+
 
   
   private

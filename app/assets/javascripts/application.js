@@ -17,4 +17,5 @@
 //= require chosen-jquery
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require redactor-rails
 //= require_tree .

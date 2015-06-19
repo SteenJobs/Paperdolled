@@ -1,12 +1,12 @@
 class RegistrationsController < Devise::RegistrationsController
-  respond_to :json, :html
-  before_filter :fix_lines
+  
   
   def update
-    # @bio = params[:undefined][:bio] if !params[:undefined].nil?
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
-
+    if !params[:bio].nil?
+      account_update_params = {:bio => params[:bio]}
+    end
     resource_updated = update_resource(resource, account_update_params)
     yield resource if block_given?
     if resource_updated
@@ -16,25 +16,12 @@ class RegistrationsController < Devise::RegistrationsController
         set_flash_message :notice, flash_key
       end
       sign_in resource_name, resource, bypass: true
-     if !@bio.nil?
-       respond_to do |format|
-         format.html 
-         format.json {respond_with_bip(resource)}
-       end
-     else
      respond_with resource, location: after_update_path_for(resource)
-     end
     else
       clean_up_passwords resource
       respond_with resource
     end
-  end
-    
-  def fix_lines
-    puts "is this working"
-    user = params[:user][:bio]
-    params[:user][:bio] = user.gsub(/\n/, '<br>')
-  end  
+  end    
     
   protected
   
@@ -47,11 +34,6 @@ class RegistrationsController < Devise::RegistrationsController
         resource.update_with_password(params)
       else
         params.delete(:current_password)
-        # if !@bio.nil? && @bio.blank?
-        #   params[:bio] = "Too cool to have a bio"
-        # else
-        #   params[:bio] = @bio 
-        # end
         resource.update_without_password(params)
       end
     end

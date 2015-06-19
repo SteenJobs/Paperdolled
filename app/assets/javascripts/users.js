@@ -29,8 +29,51 @@ $(document).ready(function () {
 	
 $(document).ready(function() {
   /* Activating Best In Place */
-  jQuery(".best_in_place").best_in_place();
+  // jQuery(".best_in_place").best_in_place();
 	// $('.best_in_place').bind('ajax:success', function(){ this.innerHTML = this.innerHTML.replace(/\n/g, '<br />') });
 	$('#questions').find('select').chosen();
+	$(function()
+	{		
+	    $('#bio').on('click', loadRedactor);
+	});
+ 
+	function loadRedactor()
+	{
+	     $('#bio').redactor({
+	        iframe: true,
+	        startCallback: function()
+	        {
+	            var marker = this.selection.getMarker();
+	            this.insert.node(marker);
+	        },
+	        initCallback: function()
+	        {
+	            this.selection.restore();
+	            $('#bio').off('click', loadRedactor);
+ 
+	            $('#btn-save').show();
+	        },
+	        destroyCallback: function()
+	        {
+	            console.log('destroy');
+	            $('#bio').on('click', loadRedactor);
+	        }
+	     });
+	}
+ 
+	function saveRedactor()
+	{
+	    // save content if you need
+	    var html = $('#bio').redactor('code.get');
+			
+ 
+	    // destroy editor
+	    $('#bio').redactor('core.destroy');
+	    $('#btn-save').hide();
+	}
+	
+	
 });
+
+
 

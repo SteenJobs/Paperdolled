@@ -38,6 +38,7 @@ gem 'jquery-turbolinks'
 gem 'best_in_place'
 gem 'chosen-rails'
 gem "compass-rails", git: 'https://github.com/Compass/compass-rails', branch: 'master'
+gem 'redactor-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
