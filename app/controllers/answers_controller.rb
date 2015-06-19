@@ -11,7 +11,10 @@ class AnswersController < ApplicationController
     params_hash = params.except(:utf8, :authenticity_token, :commit, :event_id, :controller, :action)
     puts params_hash
     params_hash.each do |key, value|
-      Answer.create(option_id: value, scenario_id: @scenario_id[0])
+      if !value.blank?
+        type_in = (key == "answer" ? value[:type_in] : nil)
+        Answer.create(option_id: value, scenario_id: @scenario_id[0], type_in: type_in)
+      end
     end
     
     if new_scenario.save

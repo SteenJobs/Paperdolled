@@ -23,7 +23,7 @@
 		</li>
 		<li>
 			<p>Anything else?</p>
-			<%= select_tag :option_id6, options_for_select(Option.all.where(question_type: "Anything else?").map{ |option| [option.possible_response, option.id, { 'data-event-id' => option.event_id }] }), {prompt: "Please select"} %>
+			<%= text_field :answer, :type_in, placeholder: "Type in..." %>
 		</li>
 		
 		<li>
