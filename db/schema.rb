@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150619092300) do
+ActiveRecord::Schema.define(version: 20150619113429) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "scenario_id"
@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(version: 20150619092300) do
   end
 
   add_index "options", ["event_id"], name: "index_options_on_event_id"
+
+  create_table "outfits", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "outfits", ["user_id"], name: "index_outfits_on_user_id"
 
   create_table "scenarios", force: :cascade do |t|
     t.integer  "user_id"

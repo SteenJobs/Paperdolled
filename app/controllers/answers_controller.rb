@@ -31,9 +31,6 @@ class AnswersController < ApplicationController
     end
   end
   
-
- 
-  
   
   protected
   

@@ -49,7 +49,7 @@
 			<div class="col-md-6 col-centered">
 		<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put, :multipart => true}) do |f| %>
 		
-		<div id="bio" name="user[bio]">
+		<div id="bio" name="user[bio]" class="text-center">
 			<%= sanitize @user.bio %>
 		</div>
 		
@@ -61,17 +61,17 @@
 			</div>
 		</div>
 	
+		<br>
+		<div class="row"></div>
 	
 			<div class="row" id="scenario">	
 				<% User.list_answers(current_user).each do |scenario| %>
-					<div class="col-md-4 well each_scenario">
-						<ul>
-							<% scenario.each do |answer| %>
-							<li>
+					<div class="col-md-4 well each_scenario">						
+							<% scenario.each do |answer| %>							
+							<p>
 								<%= answer %>
-							</li>
-							<% end %>
-						</ul>
+							</p>
+							<% end %>						
 					</div>
 				<% end %>
 			</div>
