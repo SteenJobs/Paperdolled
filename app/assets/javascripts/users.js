@@ -32,9 +32,11 @@ $(document).ready(function() {
   // jQuery(".best_in_place").best_in_place();
 	// $('.best_in_place').bind('ajax:success', function(){ this.innerHTML = this.innerHTML.replace(/\n/g, '<br />') });
 	$('#questions').find('select').chosen();
-  $("#addSchool").click(function(){
-  	$("#schoolContainer").append('<option value="' + $("#newSchool").val() + '">' + $("#newSchool").val() + '</option>');
-  });
+	$('#sandbox-container').datepicker({
+	    format: "M dd, yyyy",
+	    autoclose: true,
+	    todayHighlight: true
+	});
 	$(function()
 	{		
 	    $('#bio').on('click', loadRedactor);

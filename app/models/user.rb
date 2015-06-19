@@ -50,12 +50,23 @@ class User < ActiveRecord::Base
 
   # Find user responses for scenarios
   def self.list_answers(user)
+    responses = []
 	  user.scenarios.limit(2).reverse.map do |scenario| 
+      sub_responses = []
+      sub_responses << scenario.answers.first.option.event.dress_me_for
 		  scenario.answers.map do |answer|
         options = Option.all.find_by(id: answer.option_id)
-        responses = options.possible_response if !options.nil?
+        sub_responses << options.possible_response if !options.nil?
+        if answer.date.present?
+          sub_responses << answer.date
+        end
+        if answer.type_in.present?
+          sub_responses << answer.type_in
+        end
       end
+      responses << sub_responses
 		end
+    responses
   end 
 
 

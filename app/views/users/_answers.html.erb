@@ -19,11 +19,11 @@
 		</li>
 		<li>
 			<p>Date:</p>
-			<%= select_tag :option_id5, options_for_select(Option.all.where(question_type: "Date:").map{ |option| [option.possible_response, option.id, { 'data-event-id' => option.event_id }] }), {prompt: "Please select"} %>
+			<input type="text" class="form-control" id="sandbox-container" name="answer[date]">
 		</li>
 		<li>
 			<p>Anything else?</p>
-			<%= text_field :answer, :type_in, placeholder: "Type in..." %>
+			<%= text_field :answer, :type_in, placeholder: "Type in...", class: "form-control" %>
 		</li>
 		
 		<li>

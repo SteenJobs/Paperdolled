@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150619084836) do
+ActiveRecord::Schema.define(version: 20150619092300) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "scenario_id"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20150619084836) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "type_in"
+    t.string   "date"
   end
 
   add_index "answers", ["option_id"], name: "index_answers_on_option_id"

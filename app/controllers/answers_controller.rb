@@ -12,8 +12,14 @@ class AnswersController < ApplicationController
     puts params_hash
     params_hash.each do |key, value|
       if !value.blank?
-        type_in = (key == "answer" ? value[:type_in] : nil)
-        Answer.create(option_id: value, scenario_id: @scenario_id[0], type_in: type_in)
+        if key == "answer"
+          @type_in = value[:type_in]
+          @date = value[:date]
+        else
+          @type_in = nil
+          @date = nil
+        end
+        Answer.create(option_id: value, scenario_id: @scenario_id[0], type_in: @type_in, date: @date)
       end
     end
     
