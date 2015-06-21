@@ -26,3 +26,24 @@ ul#questions {
 .row {
 	margin-top: 20px;
 }
+
+#user_scenario {
+	margin-top: 20px;
+}
+
+.headerDivider {
+     border-left:1px solid #38546d; 
+     border-right:1px solid #16222c; 
+     height:80px;
+     position:absolute;
+     right:249px;
+     top:10px; 
+}
+
+#vertical_separator {
+    position:absolute;
+    left:50%;
+    top:10%;
+    bottom:10%;
+    border-left:1px solid white;
+}

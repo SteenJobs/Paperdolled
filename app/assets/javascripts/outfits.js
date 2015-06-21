@@ -1,15 +1,14 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://coffeescript.org/
-
+var lastClicked;
 $(document).ready(function () {
+	
 	
 	var handle = $('.ui-resizable-handle')
 	var initialClass = "draggable"
 	if (handle.parent().hasClass(initialClass)) {
 		handle.hide();
-	}
-	else {
 	}
 	
 	var items = $('.draggable')
@@ -20,7 +19,7 @@ $(document).ready(function () {
 	items2.width(150)
 	items2.height(150)
 	
-	var newClass = 'draggable2 ui-draggable ui-draggable-handle ui-resizable ui-draggable-dragging'
+	var newClass = 'draggable2 ui-draggable ui-draggable-handle ui-resizable ui-resizable-autohide ui-draggable-dragging'
   // For each .draggable element
   $('.draggable').each(function() {
     // Set up the variables
@@ -43,9 +42,9 @@ $(document).ready(function () {
 	  accept: ".draggable, .draggable2",
 		tolerance: "fit",
 		hoverClass: "drop-hover",
-	  drop: addDrag
-	 });
-					 
+	  drop: addDrag,
+		out: removeItem
+	 });	 
 					 
 	$( ".draggable" ).draggable({
 	  revert: "invalid",
@@ -53,12 +52,99 @@ $(document).ready(function () {
 		//stop: help
 	});
 	
+	// Enable dialog box
+	
+	var myDialog = $( "#dialog" ).dialog({
+	  autoOpen: false,
+		// focus: closeDialog,
+    open: function(e) {
+        closedialog = 1;
+        $(document).bind('click', overlayclickclose);
+    },
+    focus: function() {
+        closedialog = 0;
+    },
+    close: function() {
+      $(document).unbind('click');
+    },
+		position: { my: "center", at: "center", of: ".draggable" }
+  });
+
+
+  var closedialog;
+
+  function overlayclickclose() {
+    if (closedialog) {
+        myDialog.dialog('close');
+     }
+    //set to one because click on dialog box sets to zero
+    closedialog = 1;
+  }
+
+
+	
+	
+	
+//	function closeDialog(event, ui) {
+	//  $(document).click(function(e) {
+	//    console.log(!$(e.target).parents().filter('.ui-dialog').length)
+	//  	console.log(myDialog.dialog("isOpen"))
+	//  	if (!$(e.target).parents().filter('.ui-dialog').length &&  myDialog.dialog("isOpen")) { 
+	//  		console.log("heh??")
+  //      	$("#dialog").dialog('close');			           
+	//  	}
+	//   });
+  //  }
+	
+	$(".draggable").on("click", function() {
+		var image = $(this).find("img.imageUpload");
+		var info = $(this).find("div.item_info");
+		if (myDialog.find("img.imageUpload") != image || myDialog.find("dv.item_info") != info) {
+      myDialog.empty("img.imageUpload");  
+      myDialog.empty("div.item_info");
+			myDialog.append(image.clone());
+			myDialog.append(info.clone());
+		}
+		else {
+		}	
+		myDialog.dialog("open")
+		closedialog = 0;
+		myDialog.dialog( "option", "position", { my: "right top", at: "center", of: this } );
+	});
+
+
+	
+
+	// Handles only around selected	
+	
+	$(document).on("click", function(e) {
+		console.log("clicked!")
+		var handle = $('.ui-resizable-handle')
+		lastClicked = $(e.target)		
+	  $('.draggable2').find('.ui-resizable-handle').hide();
+		if ($(e.target).is('.imageUpload')) {
+			$(e.target).siblings('.ui-resizable-handle').show();
+		} 
+		if ($(e.target).parent().hasClass("draggable")) {
+			handle.hide()
+	  }
+		lastClicked.toggleClass('last_clicked')
+		console.log(lastClicked)
+	});
+	
+  function removeItem(event, ui) {
+      $(ui.draggable).fadeOut(100, function () {
+          $(this).remove();
+      });
+  }
+	
 	function addDrag( event, ui ) {
 		var canvas = $('#outfit_canvas')
 		var dropElem = ui.draggable.get(0)
 		var clone = $(dropElem).clone()
-		console.log($(clone).attr('class'))
-		if ($(clone).attr('class') != newClass) {
+		var cloneClass = $(clone).attr('class')
+		console.log(cloneClass)
+		if (cloneClass != newClass) {
 			clone.attr('class', 'draggable2');
 			// position of the draggable minus position of the droppable
       // relative to the document
@@ -69,14 +155,18 @@ $(document).ready(function () {
       clone.css('top',$newPosY);
 
 			clone.appendTo("#outfit_canvas");
+			
 			$(clone).draggable({
 	  		revert: "invalid"
-			});
+			})
+				
+			
 			$(clone).resizable({
      	 // minWidth: image.width(),
      	 // minHeight: image.height(),
   			aspectRatio: true,
-				containment: "parent",
+				maxHeight: $('.ui-droppable').height(),
+				maxWidth: $('.ui-droppable').width(),
       	handles: {
           	'nw': '#nwgrip',
           	'ne': '#negrip',
@@ -86,10 +176,16 @@ $(document).ready(function () {
           	'e': '#egrip',
           	's': '#sgrip',
           	'w': '#wgrip'
-      	}
-	  	});
-		}
-		else {	
+      	},
+			    autoHide: true
+			}).off('mouseenter mouseleave').on({
+			    click: function () {
+						$(this).find('.ui-resizable-handle').show();
+			    }
+				});
 		}
 	}
+	
+	
+	
 });

@@ -21,19 +21,18 @@
 												<h2><%= user.first_name + " " + user.last_name %></h2>
 												<p class="adm">Last updated on <%= user.updated_at.localtime.strftime('%A, %B %d') %></p>
 												<%= link_to image_tag(user.picture), user_path(user), class: "img-responsive" %>
-												
-													<% User.list_answers(current_user).each do |scenario| %>
-																		
-																<% scenario.each do |answer| %>							
-																<p>
-																	<%= answer %>
-																</p>
-																<% end %>						
-														
+													<div class="well" id="user_scenario">			
+													<% User.list_answers(user).each do |scenario| %>
+															<% scenario.each do |answer| %>																
+																<%= answer %><br>																	
+															<% end %>																				
 													<% end %>
-										
+													</div>
+												<div>
 												<%= link_to "View Profile", user_path(user), class: "link" %>
-										
+												&nbsp;&nbsp;
+												<%= link_to "Style Me!", new_outfit_path, class: "link" %>
+											  </div>
 											</div>
 										</div>
 									</div>

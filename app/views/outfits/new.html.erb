@@ -9,12 +9,12 @@
 
 
 
-	<div class="col-md-5 well">
+	<div class="col-md-5 well" id="outfits_well">
 		
-			<% @item.each do |item| %>
-			<div class="col-md-4">
-			<div class="draggable">
-				<%= image_tag item.picture %>
+		<% @items.each do |item| %>
+		<div class="col-md-3">
+		<div class="draggable">
+				<%= image_tag item.picture, class: "imageUpload" %>	
     	<div class="ui-resizable-handle ui-resizable-nw" id="nwgrip"></div>
     	<div class="ui-resizable-handle ui-resizable-ne" id="negrip"></div>
     	<div class="ui-resizable-handle ui-resizable-sw" id="swgrip"></div>
@@ -23,13 +23,21 @@
     	<div class="ui-resizable-handle ui-resizable-s" id="sgrip"></div>
     	<div class="ui-resizable-handle ui-resizable-e" id="egrip"></div>
     	<div class="ui-resizable-handle ui-resizable-w" id="wgrip"></div>
-		</div>
-			<div class="text-center">
+			<div class="item_info text-center">
 				<%= link_to item.name, item.link %>
-				<%= item.price %>
+				<p>
+					<%= item.price %>
+				</p>
 			</div>
 		</div>
+			
+		</div>
 			<% end %>
+		</div>
+		
+		<%= will_paginate @items %>
+		
+		<div id="dialog" title="Basic dialog">
 		</div>
 	</div>
 </div>

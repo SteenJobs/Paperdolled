@@ -1,5 +1,5 @@
 class OutfitsController < ApplicationController
   def new
-    @item = Item.all
+    @items = Item.all.paginate(:page => params[:page])
   end
 end

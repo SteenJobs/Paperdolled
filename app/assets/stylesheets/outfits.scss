@@ -8,20 +8,34 @@
 	width: 98.5%;
 }
 
+.draggable div.item_info {
+	display: none;
+}
+
+.draggable2 div.item_info {
+	display: none;
+}
+
 .draggable {
     border: 1px solid #000000;
     overflow: visible;
-		display: block;
+		display: inline-block;
 		margin-left: auto;
 		margin-right: auto;
+		position: relative;
+		padding: 0px;
+		width: 100% !important;
+		height: 100% !important;
 }
 
 .draggable2 {
     border: 1px solid #000000;
     overflow: visible;
+		position: absolute !important;
 }
 
-.well {
+
+#outfits_well {
 	margin-left: -20px;
 }
 
@@ -35,11 +49,20 @@
 .draggable img {
 	width: 100%;
 	height: 100%;
+	display: block;
+	line-height: 0px;
+	position: relative;
+	vertical-align: top;
 }
 
 .draggable2 img {
 	width: 100%;
 	height: 100%;
+}
+
+img.imageUpload {
+	margin-left: 0px !important;
+	margin-right: 0px !important;
 }
 
 #nwgrip, #negrip, #swgrip, #segrip, #ngrip, #egrip, #sgrip, #wgrip {
