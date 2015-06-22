@@ -16,8 +16,8 @@
 //= require jquery-ui
 //= require best_in_place
 //= require chosen-jquery
-//= require turbolinks
 //= require bootstrap-sprockets
 //= require redactor-rails
 //= require bootstrap-datepicker
+//= require turbolinks
 //= require_tree .

@@ -2,24 +2,35 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://coffeescript.org/
 var lastClicked;
-$(document).ready(function () {
-	
-	
-	var handle = $('.ui-resizable-handle')
-	var initialClass = "draggable"
-	if (handle.parent().hasClass(initialClass)) {
-		handle.hide();
-	}
-	
-	var items = $('.draggable')
-	var items2 = $('.draggable2')
-	
-	items.width(150)
-	items.height(150)
-	items2.width(150)
-	items2.height(150)
-	
-	var newClass = 'draggable2 ui-draggable ui-draggable-handle ui-resizable ui-resizable-autohide ui-draggable-dragging'
+
+// Ajax pagination
+$(function () {
+	$('.pagination').on("click", 'a', function (e) {
+		$.get(this.href, null, loadJS, 'script');
+		return false;
+  });
+});
+
+function loadJS () {
+
+  var handle = $('.ui-resizable-handle')
+  var initialClass = "draggable"
+  if (handle.parent().hasClass(initialClass)) {
+  	handle.hide();
+  }
+  
+  var items = $('.draggable')
+  var items2 = $('.draggable2')
+  
+  items.width(150)
+  items.height(150)
+  items2.width(150)
+  items2.height(150)
+  
+  
+  // Drop on curser location
+  
+  var newClass = 'draggable2 ui-draggable ui-draggable-handle ui-resizable ui-resizable-autohide ui-draggable-dragging'
   // For each .draggable element
   $('.draggable').each(function() {
     // Set up the variables
@@ -28,7 +39,7 @@ $(document).ready(function () {
         h = $this.find('img').height(); // Height of the image inside .draggable
     $this.width(w).height(h); // Set width and height of .draggable to match image
   });
-	
+  
   // For each .draggable2 element
   $('.draggable2').each(function() {
     // Set up the variables
@@ -37,26 +48,28 @@ $(document).ready(function () {
         h = $this.find('img').height(); // Height of the image inside .draggable2
     $this.width(w).height(h); // Set width and height of .draggable2 to match image
   });
+  
+  $( "#outfit_canvas" ).droppable({
+    accept: ".draggable, .draggable2",
+  	tolerance: "fit",
+  	hoverClass: "drop-hover",
+    drop: addDrag,
+  	out: removeItem
+   });	 
+  				 
+  $( ".draggable" ).draggable({
+    revert: "invalid",
+  	helper: "clone"
+  	//stop: help
+  });
+  
+  
+  // Enable dialog box
+  var myDialog = $("#dialog")
 	
-	$( "#outfit_canvas" ).droppable({
-	  accept: ".draggable, .draggable2",
-		tolerance: "fit",
-		hoverClass: "drop-hover",
-	  drop: addDrag,
-		out: removeItem
-	 });	 
-					 
-	$( ".draggable" ).draggable({
-	  revert: "invalid",
-		helper: "clone"
-		//stop: help
-	});
-	
-	// Enable dialog box
-	
-	var myDialog = $( "#dialog" ).dialog({
-	  autoOpen: false,
-		// focus: closeDialog,
+  $( "#dialog" ).dialog({
+    autoOpen: false,
+  	// focus: closeDialog,
     open: function(e) {
         closedialog = 1;
         $(document).bind('click', overlayclickclose);
@@ -67,12 +80,12 @@ $(document).ready(function () {
     close: function() {
       $(document).unbind('click');
     },
-		position: { my: "center", at: "center", of: ".draggable" }
+  	position: { my: "center", at: "center", of: ".draggable" }
   });
-
-
+  
+  
   var closedialog;
-
+  
   function overlayclickclose() {
     if (closedialog) {
         myDialog.dialog('close');
@@ -80,93 +93,81 @@ $(document).ready(function () {
     //set to one because click on dialog box sets to zero
     closedialog = 1;
   }
-
-
-	
-	
-	
-//	function closeDialog(event, ui) {
-	//  $(document).click(function(e) {
-	//    console.log(!$(e.target).parents().filter('.ui-dialog').length)
-	//  	console.log(myDialog.dialog("isOpen"))
-	//  	if (!$(e.target).parents().filter('.ui-dialog').length &&  myDialog.dialog("isOpen")) { 
-	//  		console.log("heh??")
-  //      	$("#dialog").dialog('close');			           
-	//  	}
-	//   });
-  //  }
-	
-	$(".draggable").on("click", function() {
-		var image = $(this).find("img.imageUpload");
-		var info = $(this).find("div.item_info");
-		if (myDialog.find("img.imageUpload") != image || myDialog.find("dv.item_info") != info) {
+  
+  $(".draggable").on("click", function() {
+  	var image = $(this).find("img.imageUpload");
+  	var info = $(this).find("div.item_info");
+  	if (myDialog.find("img.imageUpload") != image || myDialog.find("dv.item_info") != info) {
       myDialog.empty("img.imageUpload");  
       myDialog.empty("div.item_info");
-			myDialog.append(image.clone());
-			myDialog.append(info.clone());
-		}
-		else {
-		}	
-		myDialog.dialog("open")
-		closedialog = 0;
-		myDialog.dialog( "option", "position", { my: "right top", at: "center", of: this } );
-	});
-
-
-	
-
-	// Handles only around selected	
-	
-	$(document).on("click", function(e) {
-		console.log("clicked!")
-		var handle = $('.ui-resizable-handle')
-		lastClicked = $(e.target)		
-	  $('.draggable2').find('.ui-resizable-handle').hide();
-		if ($(e.target).is('.imageUpload')) {
-			$(e.target).siblings('.ui-resizable-handle').show();
-		} 
-		if ($(e.target).parent().hasClass("draggable")) {
-			handle.hide()
-	  }
-		lastClicked.toggleClass('last_clicked')
-		console.log(lastClicked)
-	});
-	
+  		myDialog.append(image.clone());
+  		myDialog.append(info.clone());
+  	}
+  	else {
+  	}	
+  	myDialog.dialog("open")
+  	closedialog = 0;
+  	myDialog.dialog( "option", "position", { my: "right top", at: "center", of: this } );
+  });
+  
+  
+  // Handles only around selected	
+  
+  $(document).on("click", function(e) {
+  	console.log("clicked!")
+  	var handle = $('.ui-resizable-handle')
+  	lastClicked = $(e.target)		
+    $('.draggable2').find('.ui-resizable-handle').hide();
+  	if ($(e.target).is('.imageUpload')) {
+  		$(e.target).siblings('.ui-resizable-handle').show();
+  	} 
+  	if ($(e.target).parent().hasClass("draggable")) {
+  		handle.hide()
+    }
+  	lastClicked.toggleClass('last_clicked')
+  	console.log(lastClicked)
+  });
+  
+  // Disappear if dragged out of canvas
+  
   function removeItem(event, ui) {
-      $(ui.draggable).fadeOut(100, function () {
+		console.log(ui)
+      $(ui.helper).fadeOut(100, function () {
           $(this).remove();
       });
   }
-	
-	function addDrag( event, ui ) {
-		var canvas = $('#outfit_canvas')
-		var dropElem = ui.draggable.get(0)
-		var clone = $(dropElem).clone()
-		var cloneClass = $(clone).attr('class')
-		console.log(cloneClass)
-		if (cloneClass != newClass) {
-			clone.attr('class', 'draggable2');
-			// position of the draggable minus position of the droppable
+  
+  // Add clone functionality
+  
+  function addDrag( event, ui ) {
+  	var canvas = $('#outfit_canvas')
+  	var dropElem = ui.draggable.get(0)
+  	var clone = $(dropElem).clone()
+  	var cloneClass = $(clone).attr('class')
+  	console.log(cloneClass)
+  	if (cloneClass != newClass) {
+  		clone.attr('class', 'draggable2');
+  		// position of the draggable minus position of the droppable
       // relative to the document
       var $newPosX = ui.offset.left - $(this).offset().left;
       var $newPosY = ui.offset.top - $(this).offset().top;
-			
+  		
       clone.css('left',$newPosX);    
       clone.css('top',$newPosY);
-
-			clone.appendTo("#outfit_canvas");
-			
-			$(clone).draggable({
-	  		revert: "invalid"
-			})
-				
-			
-			$(clone).resizable({
+  
+  		clone.appendTo("#outfit_canvas");
+  		
+  		$(clone).draggable({
+    		revert: "invalid"
+  		})
+  			
+  		
+  		$(clone).resizable({
      	 // minWidth: image.width(),
      	 // minHeight: image.height(),
   			aspectRatio: true,
-				maxHeight: $('.ui-droppable').height(),
-				maxWidth: $('.ui-droppable').width(),
+  			maxHeight: $('.ui-droppable').height(),
+  			maxWidth: $('.ui-droppable').width(),
       	handles: {
           	'nw': '#nwgrip',
           	'ne': '#negrip',
@@ -176,16 +177,25 @@ $(document).ready(function () {
           	'e': '#egrip',
           	's': '#sgrip',
           	'w': '#wgrip'
-      	},
-			    autoHide: true
-			}).off('mouseenter mouseleave').on({
-			    click: function () {
-						$(this).find('.ui-resizable-handle').show();
-			    }
-				});
-		}
-	}
+      	}
+			/*	
+				,
+  		    autoHide: true
+  		}).off('mouseenter mouseleave').on({
+  		    click: function () {
+  					$(this).find('.ui-resizable-handle').show();
+  		    }
+  			});
+				*/
+			});
+  	}
+  }
+}
+
+$(document).ready(function () {
 	
-	
-	
+
+		loadJS();
+
+
 });
