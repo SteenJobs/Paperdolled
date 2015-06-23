@@ -75,7 +75,21 @@
 					</div>
 				<% end %>
 			</div>
-				
+			
+			<div class="row" id="outfit">
+				<% @user.outfits.each do |outfit| %>
+				<div class="col-md-4">
+					<div id="small_outfit_canvas">
+						<% outfit.items.each do |item| %>
+						<div class="small_draggable2" data-item-id='<%= item.id %>' data-top='<%= item.closets.find_by(outfit_id: outfit.id).y_coordinate %>' data-left='<%= item.closets.find_by(outfit_id: outfit.id).x_coordinate %>' data-height='<%= item.closets.find_by(outfit_id: outfit.id).height %>' data-width='<%= item.closets.find_by(outfit_id: outfit.id).width %>'>
+						<%= image_tag item.picture, class: "imageUpload" %>	
+					</div>
+					<% end %>
+				</div>
+			</div>
+					<% end %>
+			</div>
+			
 			 <div class="comments1">
 								<h4>COMMENTS</h4>
 			  				<div class="comments-main">

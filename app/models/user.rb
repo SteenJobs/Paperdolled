@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   mount_uploader :picture, PictureUploader
   
   has_many :scenarios
+  has_many :outfits
   
 
                 

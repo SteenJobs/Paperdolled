@@ -82,7 +82,40 @@ $(document).ready(function () {
 	  });
   });
 	
+	$(function () {
+		var items = $('.small_draggable2')
+		items.each(function () { 
+			var obj = $(this);
+			var canvas = $('#small_outfit_canvas')
+			var width = obj.data().width;
+			var height = obj.data().height;
+			var canvasHeight = canvas.height();
+			var canvasWidth = canvas.width();
+			var newHeight = height * canvasHeight;
+			var newWidth = width * canvasWidth;
+			obj.height(newHeight);
+			obj.width(newWidth);
+			var offsetX = obj.data().left;
+			var offsetY = obj.data().top;
+			var PosX = (offsetX * canvasWidth) + canvas.offset().left;
+			var PosY = (offsetY * canvasHeight) + canvas.offset().top;
+			obj.offset({ top: PosY, left: PosX });
+			console.log(offsetY)
+			console.log(canvas.offset().top)
+			console.log(PosY)
+		});
+	});
+	
 });
+
+/*
+obj.style.setProperty('left', PosX, 'important');
+obj.style.setProperty('top', PosY, 'important');
+obj.style.setProperty('height', newHeight, 'important');
+obj.style.setProperty('width', newWidth, 'important');
+*/
+
+
 
 
 

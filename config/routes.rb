@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :scenarios
   resources :answers
   resources :outfits
+  resources :closets, only: [:create]
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 

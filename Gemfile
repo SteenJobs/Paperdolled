@@ -42,6 +42,7 @@ gem 'redactor-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'jquery-ui-rails'
 gem 'yajl-ruby', require: 'yajl'
+gem 'gon'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

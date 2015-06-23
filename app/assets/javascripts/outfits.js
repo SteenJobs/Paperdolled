@@ -11,6 +11,33 @@ $(function () {
   });
 });
 
+$(function () {
+	$('#outfits_button').on("click", function () {
+		var items = $('#outfit_canvas .draggable2')
+		var canvas = $('#outfit_canvas')
+		var array = []
+			items.each(function () { 
+			var x_coordinate = ($(this).offset().left - canvas.offset().left) / $('#outfit_canvas').width();
+			var y_coordinate = ($(this).offset().top - canvas.offset().top) / $('#outfit_canvas').height();
+			var height = $(this).height() / $('#outfit_canvas').height();
+			var width = $(this).width() / $('#outfit_canvas').width();
+			var item_id = $(this).data().itemId;
+			var outfit_id = $(this).data().outfitId;
+		  var object = {item_id: item_id, x_coordinate: x_coordinate, y_coordinate: y_coordinate, height: height, width: width};
+			array.push(object)
+		});
+		$.post(
+			"/closets",
+			{object: array},
+			function(data) {
+			  window.location = data.location
+			},
+			'json'
+		);
+		return false;
+	});
+});
+
 function loadJS () {
 
   var handle = $('.ui-resizable-handle')
@@ -30,7 +57,7 @@ function loadJS () {
   
   // Drop on curser location
   
-  var newClass = 'draggable2 ui-draggable ui-draggable-handle ui-resizable ui-resizable-autohide ui-draggable-dragging'
+  var newClass = 'draggable2 ui-draggable ui-draggable-handle ui-resizable ui-draggable-dragging'
   // For each .draggable element
   $('.draggable').each(function() {
     // Set up the variables
@@ -116,7 +143,7 @@ function loadJS () {
   $(document).on("click", function(e) {
   	console.log("clicked!")
   	var handle = $('.ui-resizable-handle')
-  	lastClicked = $(e.target)		
+  	// lastClicked = $(e.target)		
     $('.draggable2').find('.ui-resizable-handle').hide();
   	if ($(e.target).is('.imageUpload')) {
   		$(e.target).siblings('.ui-resizable-handle').show();
@@ -124,7 +151,7 @@ function loadJS () {
   	if ($(e.target).parent().hasClass("draggable")) {
   		handle.hide()
     }
-  	lastClicked.toggleClass('last_clicked')
+  	// lastClicked.toggleClass('last_clicked')
   	console.log(lastClicked)
   });
   
@@ -150,7 +177,7 @@ function loadJS () {
   		// position of the draggable minus position of the droppable
       // relative to the document
       var $newPosX = ui.offset.left - $(this).offset().left;
-      var $newPosY = ui.offset.top - $(this).offset().top;
+      var $newPosY =  ui.offset.top - $(this).offset().top;
   		
       clone.css('left',$newPosX);    
       clone.css('top',$newPosY);
