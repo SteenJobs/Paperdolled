@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   
   has_many :scenarios
   has_many :outfits
+  has_many :authentications
   
 
                 
@@ -17,6 +18,13 @@ class User < ActiveRecord::Base
   validate  :picture_size
   
          
+  def apply_omniauth(auth)
+    self.email = auth.email
+    self.remote_picture_url = auth.info.image if self.picture.blank?
+    self.first_name = auth.info.first_name
+    self.last_name = auth.info.last_name
+    authentications.build(provider: auth.provider, uid: auth.uid, token: auth.extension.token)
+  end       
          
   def self.from_omniauth(auth)
     if self.where(email: auth.info.email).exists?

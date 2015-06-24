@@ -94,7 +94,7 @@ $(function() {
            // Do some other stuff here (call more json, load in more elements, etc)
          });
        }
-     }, { scope: 'email,read_stream' }); // These are the permissions you are requesting
+     }, { scope: 'email' }); // These are the permissions you are requesting
    });
 
    $('#connect .signout').click(function(e) {
