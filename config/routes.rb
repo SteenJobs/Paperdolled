@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   mount RedactorRails::Engine => '/redactor_rails'
+  devise_scope :user do
+    # using login path for registration
+    get '/login' => 'registrations#new', :as => :new_user_registration
+    # post '/signup' => 'registrations#create', :as => :user_registration
+    # post '/signin' => 'sessions#create', :as => :user_session
+  end
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :registrations => "registrations" }
+  match 'users/auth/:provider/callback' => 'authentications#create'
+  match '/auth/:provider/signout' => 'authentications#signout'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   resources :users

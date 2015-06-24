@@ -1,41 +1,103 @@
-<h2>Sign up</h2>
+<div id="fb-root"></div>
+<div class="container">
+    	<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-login">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-6">
+								<a href="#" class="active" id="login-form-link">Login</a>
+							</div>
+							<div class="col-xs-6">
+								<a href="#" id="register-form-link">Register</a>
+							</div>
+						</div>
+						<hr>
+					</div>
+					
+					<!-- Login -->
+					
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { id: 'login-form', :style => 'display: block;'}) do |f| %>
+									<div class="form-group">
+										<%= f.email_field :email, name: 'email', id: 'email', tabindex: "1", class: 'form-control', placeholder: 'Email', autofocus: true %>
+									</div>
+									<div class="form-group">
+										<%= f.password_field :password, name: "password", id: "password", tabindex: "2", class: "form-control", placeholder: "Password", autocomplete: "off" %>
+									</div>
+									<% if devise_mapping.rememberable? -%>
+									<div class="form-group text-center">
+							      <%= f.check_box :remember_me, tabindex: "3", name: "remember", id: "remember" %>
+							      <%= f.label :remember_me %>
+									</div>
+									<% end -%>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<%= f.submit "Log in", name: "login-submit", id: "login-submit", tabindex: "4", class: "form-control btn btn-login" %>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="text-center">
+													<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+													  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+													<% end -%>
+												</div>
+											</div>
+										</div>
+									</div>									
+                    <hr/>
+                  <center><h4>OR</h4></center>
+									<div class="row">
+										<div class="col-sm-6 col-sm-offset-3">
+											<div id="connect">
+											<div class="signin fb-login-button" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"></div>
+										</div>
+									</div>
+									</div>
+									<% end %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+									<!-- New Registration -->
+								
+								
+								<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { id: 'register-form', :style => 'display: none;'}) do |f| %><!--display:block-->
+								  <%= devise_error_messages! %>
+									<div class="form-group">
+										<%= f.text_field :first_name, name: 'first_name', id: 'first_name', class: 'form-control', tabindex: '1', placeholder: 'First name', autofocus: true %>
+									</div>
+									<div class="form-group">
+										<%= f.text_field :last_name, name: 'last_name', id: 'last_name', class: 'form-control', tabindex: '1', placeholder: 'Last name', autofocus: true %>
+									</div>
+									<div class="form-group">
+										<%= f.email_field :email, name: 'email', id: 'email', tabindex: "1", class: 'form-control', placeholder: 'Email', autofocus: true %>
+									</div>
+									<div class="form-group">
+							    <% if @minimum_password_length %>
+							    <em>(<%= @minimum_password_length %> characters minimum)</em>
+							    <% end %><br />
+							    <%= f.password_field :password, name: "password", id: "password", tabindex: "2", class: "form-control", placeholder: "Password", autocomplete: "off" %>
+									</div>
+									<div class="form-group">
+										<%= f.password_field :password_confirmation, name: "confirm-password", id: "confirm-password", tabindex: "2", class: "form-control", placeholder: "Confirm Password", autocomplete: "off" %>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<%= f.submit "Sign Up", name: "register-submit", id: "register-submit", tabindex: "4", class: "form-control btn btn-register" %>
+											</div>
+										</div>
+									</div>
+									<% end %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
-  </div>
-	
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autofocus: true %>
-  </div>
-  
-	<div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-	<%= f.hidden_field :bio, :value => "Describe yourself!" %>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
