@@ -5,43 +5,45 @@
 
 
 <!-- content -->
-<div class="content">
-	<div class="container">
-		<div class="load_more">	
-			<ul id="myList">
+
+	<div class="container-fluid">
+	<%= render "layouts/main_navbar" %>
+	</div>
+
+			<div class="container">
 			        <!-- These are our grid blocks --> 
-				<% @users.in_groups_of(4,false).each do |group| %>
-					<li>
+				<% @users.in_groups_of(3,false).each do |group| %>
 						<div class="row">
-							<div class="l_g">
+						
 								<% group.each do |user| %>
-									<div class="col-md-3 praesent">
-										<div class="l_g_r">
-											<div class="dapibus">
-												<h2><%= user.first_name + " " + user.last_name %></h2>
+									<div class="col-md-4">
+										
+									
+									
+												<h5><%= user.first_name + " " + user.last_name %></h5>
+												<hr style="border-color: black;">
 												<p class="adm">Last updated on <%= user.updated_at.localtime.strftime('%A, %B %d') %></p>
-												<%= link_to image_tag(user.picture), user_path(user), class: "img-responsive" %>
-													<div class="well" id="user_scenario">			
+												<!-- <%= link_to image_tag(user.picture), user_path(user), class: "img-responsive" %> -->
+													<%= link_to image_tag("http://placehold.it/300x300"), user_path(user), class: "img-responsive" %>
+																
 													<% User.list_answers(user).each do |scenario| %>
 															<% scenario.each do |answer| %>																
 																<%= answer %><br>																	
 															<% end %>																				
 													<% end %>
-													</div>
-												<div>
+												
+												
 												<%= link_to "View Profile", user_path(user), class: "link" %>
 												&nbsp;&nbsp;
 												<%= link_to "Style Me!", new_outfit_path, class: "link" %>
-											  </div>
+							
+											
 											</div>
-										</div>
-									</div>
 								<% end %>
-							</div>
+					
 						</div>
-					</li>
 				<% end %>
-			</ul>
+
 
 			<br>
 			<br>
@@ -52,57 +54,7 @@
 					<div id="showLess">Show less</div>
 				</div>
 			</div>
-		</div>
+		
 	</div>
-</div>
+
 					
-<!-- content -->	
-<!-- footer -->
-	<div class="footer">
-		<div class="container">
-			<div class="col-md-3 copy">
-				<div class="top1">
-					<i class="ham"></i>
-				</div>
-				<div class="top2">
-					<h6>Copyrights © 2015 Graphic</h6>
-					<p>All rights reserved</p>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="col-md-3 copy">
-				<div class="top1">
-					<i class="men"></i>
-				</div>
-				<div class="top2">
-					<h6>Template by: </h6>
-					<p><a href="http://w3layouts.com/">W3layouts</a></p>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="col-md-3 copy">
-				<div class="top1">
-					<i class="app"></i>
-				</div>
-				<div class="top2">
-					<h6>Images From: </h6>
-					<p><a href="#"> www.wallcoo.net</a></p>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="col-md-3 copy">
-				<div class="top1">
-					<i class="lik"></i>
-				</div>
-				<div class="top2">
-					<h6>Website </h6>
-					<p><a href="#"> www.yourblog.com</a></p>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-	</div>
-<!-- footer -->
-</body>
-</html>

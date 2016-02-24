@@ -402,7 +402,7 @@ DEPENDENCIES
   mini_magick
   minitest-reporters
   omniauth-facebook
-  pg
+  pg (~> 0.15)
   populator
   puma
   rails (= 4.2.1)
@@ -417,3 +417,6 @@ DEPENDENCIES
   web-console (~> 2.0)
   will_paginate
   yajl-ruby
+
+BUNDLED WITH
+   1.10.5

@@ -1,6 +1,6 @@
 <div id="fb-root"></div>
-<div class="container">
-    	<div class="row">
+<div class="container-login">
+    	<div class="row login">
 			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-login">
 					<div class="panel-heading">
@@ -20,16 +20,16 @@
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { id: 'login-form', :style => 'display: block;'}) do |f| %>
+								<%= form_for(resource, as: resource_name, url: user_login_path, html: { id: 'login-form', :style => 'display: block;'}) do |f| %>
 									<div class="form-group">
-										<%= f.email_field :email, name: 'email', id: 'email', tabindex: "1", class: 'form-control', placeholder: 'Email', autofocus: true %>
+										<%= f.email_field :email, name: 'user[email]', id: 'email', tabindex: "1", class: 'form-control', placeholder: 'Email', autofocus: true %>
 									</div>
 									<div class="form-group">
-										<%= f.password_field :password, name: "password", id: "password", tabindex: "2", class: "form-control", placeholder: "Password", autocomplete: "off" %>
+										<%= f.password_field :password, name: "user[password]", id: "password", tabindex: "2", class: "form-control", placeholder: "Password", autocomplete: "off" %>
 									</div>
 									<% if devise_mapping.rememberable? -%>
 									<div class="form-group text-center">
-							      <%= f.check_box :remember_me, tabindex: "3", name: "remember", id: "remember" %>
+							      <%= f.check_box :remember_me, tabindex: "3", name: "user[remember]", id: "remember" %>
 							      <%= f.label :remember_me %>
 									</div>
 									<% end -%>
@@ -55,10 +55,12 @@
                   <center><h4>OR</h4></center>
 									<div class="row">
 										<div class="col-sm-6 col-sm-offset-3">
-											
-											<p id="connect">
-											  <a class="signin" href="#">Signin</a>
-											</p>
+
+											<div id="connect">
+											<div class="signin fb-login-button" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"></div>
+
+											<div id="connect">
+											<%= link_to "helloooo", '#', class: 'signin'%>
 										</div>
 									</div>
 									</div>
@@ -67,30 +69,31 @@
 									<!-- New Registration -->
 								
 								
-								<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { id: 'register-form', :style => 'display: none;'}) do |f| %><!--display:block-->
+								<%= form_for(resource, as: resource_name, url: user_signup_path, html: { id: "new_user", :style => 'display: none;'}) do |f| %><!--display:block-->
 								  <%= devise_error_messages! %>
 									<div class="form-group">
-										<%= f.text_field :first_name, name: 'first_name', id: 'first_name', class: 'form-control', tabindex: '1', placeholder: 'First name', autofocus: true %>
+										<%= f.text_field :first_name, name: 'user[first_name]', id: 'first_name', class: 'form-control', tabindex: '1', placeholder: 'First name', autofocus: true %>
 									</div>
 									<div class="form-group">
-										<%= f.text_field :last_name, name: 'last_name', id: 'last_name', class: 'form-control', tabindex: '1', placeholder: 'Last name', autofocus: true %>
+										<%= f.text_field :last_name, name: 'user[last_name]', id: 'last_name', class: 'form-control', tabindex: '1', placeholder: 'Last name', autofocus: true %>
 									</div>
 									<div class="form-group">
-										<%= f.email_field :email, name: 'email', id: 'email', tabindex: "1", class: 'form-control', placeholder: 'Email', autofocus: true %>
+										<%= f.email_field :email, name: 'user[email]', id: 'email', tabindex: "1", class: 'form-control', placeholder: 'Email', autofocus: true %>
 									</div>
 									<div class="form-group">
 							    <% if @minimum_password_length %>
 							    <em>(<%= @minimum_password_length %> characters minimum)</em>
 							    <% end %><br />
-							    <%= f.password_field :password, name: "password", id: "password", tabindex: "2", class: "form-control", placeholder: "Password", autocomplete: "off" %>
+							    <%= f.password_field :password, name: "user[password]", id: "password", tabindex: "2", class: "form-control", placeholder: "Password", autocomplete: "off" %>
 									</div>
 									<div class="form-group">
-										<%= f.password_field :password_confirmation, name: "confirm-password", id: "confirm-password", tabindex: "2", class: "form-control", placeholder: "Confirm Password", autocomplete: "off" %>
+										<%= f.password_field :password_confirmation, name: "user[password_confirmation]", id: "confirm-password", tabindex: "2", class: "form-control", placeholder: "Confirm Password", autocomplete: "off" %>
 									</div>
+									<%= f.hidden_field :bio, name: "user[bio]", :value => "Describe yourself!" %>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
-												<%= f.submit "Sign Up", name: "register-submit", id: "register-submit", tabindex: "4", class: "form-control btn btn-register" %>
+												<%= f.submit "Sign Up", name: 'commit', id: "register-submit", tabindex: "4", class: "form-control btn btn-register" %>
 											</div>
 										</div>
 									</div>

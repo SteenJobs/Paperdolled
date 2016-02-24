@@ -85,11 +85,12 @@ $(function() {
 
      FB.login(function(response) {
        if (response.authResponse) {
-         $('#results').html('Connected! Hitting OmniAuth callback (GET users/auth/facebook/callback)...');
+				 window.location = '/users/auth/facebook/'
+         $('#results').html('Connected! Hitting OmniAuth callback (GET /users/auth/facebook/callback)...');
 
          // since we have cookies enabled, this request will allow omniauth to parse
          // out the auth code from the signed request in the fbsr_XXX cookie
-         $.getJSON('users/auth/facebook/callback', function(json) {
+         $.getJSON('/users/auth/facebook/callback', function(json) {
            $('#results').html(JSON.stringify(json));
            // Do some other stuff here (call more json, load in more elements, etc)
          });
@@ -97,7 +98,7 @@ $(function() {
      }, { scope: 'email' }); // These are the permissions you are requesting
    });
 
-   $('#connect .signout').click(function(e) {
+   $('#signout').click(function(e) {
      e.preventDefault();
      $.getJSON('/auth/facebook/signout', function(json) {
        $('#results').html(JSON.stringify(json));

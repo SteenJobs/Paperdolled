@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
   mount RedactorRails::Engine => '/redactor_rails'
+  
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :registrations => "registrations" }
   devise_scope :user do
     # using login path for registration
-    get '/login' => 'registrations#new', :as => :new_user_registration
-    # post '/signup' => 'registrations#create', :as => :user_registration
-    # post '/signin' => 'sessions#create', :as => :user_session
+    get '/login' => 'registrations#new', :as => :new_user_signup
+    post '/sign_up' => 'registrations#create', :as => :user_signup
+    post '/sign_in' => 'devise/sessions#create', :as => :user_login
   end
-  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :registrations => "registrations" }
+
   get 'users/auth/:provider/callback' => 'authentications#create'
   get '/auth/:provider/signout' => 'authentications#signout'
+
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   resources :users
@@ -16,6 +20,7 @@ Rails.application.routes.draw do
   resources :answers
   resources :outfits
   resources :closets, only: [:create]
+  resources :items
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 

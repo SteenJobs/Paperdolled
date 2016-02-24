@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150624055246) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "answers", force: :cascade do |t|
     t.integer  "scenario_id"
     t.integer  "option_id"
@@ -22,8 +25,8 @@ ActiveRecord::Schema.define(version: 20150624055246) do
     t.string   "date"
   end
 
-  add_index "answers", ["option_id"], name: "index_answers_on_option_id"
-  add_index "answers", ["scenario_id"], name: "index_answers_on_scenario_id"
+  add_index "answers", ["option_id"], name: "index_answers_on_option_id", using: :btree
+  add_index "answers", ["scenario_id"], name: "index_answers_on_scenario_id", using: :btree
 
   create_table "authentications", force: :cascade do |t|
     t.integer  "user_id"
@@ -34,7 +37,7 @@ ActiveRecord::Schema.define(version: 20150624055246) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "authentications", ["user_id"], name: "index_authentications_on_user_id"
+  add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
   create_table "closets", id: false, force: :cascade do |t|
     t.integer  "outfit_id"
@@ -47,9 +50,9 @@ ActiveRecord::Schema.define(version: 20150624055246) do
     t.float    "height"
   end
 
-  add_index "closets", ["item_id"], name: "index_closets_on_item_id"
-  add_index "closets", ["outfit_id", "item_id"], name: "index_closets_on_outfit_id_and_item_id", unique: true
-  add_index "closets", ["outfit_id"], name: "index_closets_on_outfit_id"
+  add_index "closets", ["item_id"], name: "index_closets_on_item_id", using: :btree
+  add_index "closets", ["outfit_id", "item_id"], name: "index_closets_on_outfit_id_and_item_id", unique: true, using: :btree
+  add_index "closets", ["outfit_id"], name: "index_closets_on_outfit_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "dress_me_for"
@@ -74,7 +77,7 @@ ActiveRecord::Schema.define(version: 20150624055246) do
     t.string   "question_type"
   end
 
-  add_index "options", ["event_id"], name: "index_options_on_event_id"
+  add_index "options", ["event_id"], name: "index_options_on_event_id", using: :btree
 
   create_table "outfits", force: :cascade do |t|
     t.integer  "user_id"
@@ -82,7 +85,7 @@ ActiveRecord::Schema.define(version: 20150624055246) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "outfits", ["user_id"], name: "index_outfits_on_user_id"
+  add_index "outfits", ["user_id"], name: "index_outfits_on_user_id", using: :btree
 
   create_table "scenarios", force: :cascade do |t|
     t.integer  "user_id"
@@ -90,7 +93,7 @@ ActiveRecord::Schema.define(version: 20150624055246) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "scenarios", ["user_id"], name: "index_scenarios_on_user_id"
+  add_index "scenarios", ["user_id"], name: "index_scenarios_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -113,7 +116,15 @@ ActiveRecord::Schema.define(version: 20150624055246) do
     t.string   "bio"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "answers", "options"
+  add_foreign_key "answers", "scenarios"
+  add_foreign_key "authentications", "users"
+  add_foreign_key "closets", "items"
+  add_foreign_key "closets", "outfits"
+  add_foreign_key "options", "events"
+  add_foreign_key "outfits", "users"
+  add_foreign_key "scenarios", "users"
 end

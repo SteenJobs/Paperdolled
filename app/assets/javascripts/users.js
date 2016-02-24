@@ -45,6 +45,29 @@ function saveRedactor()
 
 $(document).ready(function () {
 
+    /*
+    // Masonry init
+        // init Isotope
+    var $grid = $('.grid').masonry({
+        itemSelector: '.grid-item',
+      //percentPosition: true,
+        //layoutMode: 'packery',
+        
+        //packery: {
+        //  gutter: 30
+        //}
+         masonry: {
+            columnWidth: 375, //".grid-sizer",
+            gutter: 30,
+            isFitWidth: true
+         }
+    });
+    // layout Isotope after each image loads
+    $grid.imagesLoaded().progress( function() {
+        $grid.isotope('layout');
+    });
+    $(window).resize(function(){ $('.grid').isotope('layout'); });
+    */
 	
     size_li = $("#myList li").size();
     x=3;

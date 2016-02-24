@@ -19,5 +19,6 @@
 //= require bootstrap-sprockets
 //= require redactor-rails
 //= require bootstrap-datepicker
+//= require masonry.pkgd.min.js
 //= require turbolinks
 //= require_tree .

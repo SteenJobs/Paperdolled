@@ -1,186 +1,91 @@
-<!-- header -->
-	<div class="details">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					
+<div class="container-fluid">
+	<%= render "layouts/main_navbar" %>
+		<div class="row">
+			<div class="col-md-12">
 				<%= render 'answers' %>
-	
 			</div>
-			</div>
-			
-			<div class="row" id="profile">
+		</div>
+
+		<div class="row" id="profile">
 			<div class="det_pic">
-				  <%= image_tag(@user.picture) if @user.picture? %>
+			  <%= image_tag(@user.picture) if @user.picture? %>
 			</div>
 		</div>
 		
 		<div class="row">
 			<div class="col-md-4 col-centered">
-		<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put, :multipart => true}) do |f| %>
-			<%= devise_error_messages! %><!--Check to make sure this works-->
-				
-				
-			  <div class="form-group">
-					<label><%= f.label :picture %></label><br />
-					<%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
-					<%= f.hidden_field :picture_cache %>
-				</div>
+				<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put, :multipart => true}) do |f| %>
 
-				<div class="form-group">
-			    <%= f.submit "Update", class: "btn btn-primary" %>
-				</div>
+					<%= devise_error_messages! %><!--Check to make sure this works-->
 				
-		  <% end %>
+			  		<div class="form-group">
+						<label><%= f.label :picture %></label><br />
+						<%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+						<%= f.hidden_field :picture_cache %>
+					</div>
+
+					<div class="form-group">
+			    		<%= f.submit "Update", class: "btn btn-primary" %>
+					</div>
+				
+		  		<% end %>
+			</div>
 		</div>
-	</div>
 			
-			<script type="text/javascript">
-			  $('#picture').bind('change', function() {
-			    var size_in_megabytes = this.files[0].size/1024/1024;
-			    if (size_in_megabytes > 5) {
-			      alert('Maximum file size is 5MB. Please choose a smaller file.');
-			    }
-			  });
-			</script>
+		<script type="text/javascript">
+		  $('#picture').bind('change', function() {
+		    var size_in_megabytes = this.files[0].size/1024/1024;
+		    if (size_in_megabytes > 5) {
+		      alert('Maximum file size is 5MB. Please choose a smaller file.');
+		    }
+		  });
+		</script>
 			
 		
 		<div class="row">
 			<div class="col-md-6 col-centered">
-		<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put, :multipart => true}) do |f| %>
+				<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put, :multipart => true}) do |f| %>
 		
-		<div id="bio" name="user[bio]" class="text-center" >
-			<%= sanitize @user.bio %>
-		</div>
+					<div id="bio" name="user[bio]" class="text-center" >
+						<%= sanitize @user.bio %>
+					</div>
+					
+					<p id="btn-save" style="display: none;">
+					   	<%= f.submit "Save", onclick: "saveRedactor();" %></button>
+					</p>
 		
-		<p id="btn-save" style="display: none;">
-		    <%= f.submit "Save", onclick: "saveRedactor();" %></button>
-		</p>
-		
-		<% end %>
+				<% end %>
 			</div>
 		</div>
 	
 		<br>
+
 		<div class="row"></div>
 	
-			<div class="row" id="scenario">	
-				<% User.list_answers(current_user).each do |scenario| %>
-					<div class="col-md-4 well each_scenario">						
-							<% scenario.each do |answer| %>							
-							<p>
-								<%= answer %>
-							</p>
-							<% end %>						
-					</div>
-				<% end %>
-			</div>
+		<div class="row users" id="scenario">	
+			<% User.list_answers(current_user).each do |scenario| %>
+				<div class="col-md-4 well each_scenario">						
+					<% scenario.each do |answer| %>							
+						<p><%= answer %></p>
+					<% end %>						
+				</div>
+			<% end %>
+		</div>
 			
-			<div class="row" id="outfit">
-				<% @user.outfits.map do |outfit| %>
+		<div class="row users" id="outfit">
+			<% @user.outfits.map do |outfit| %>
 				<div class="col-md-4">
 					<div class="small_outfit_canvas">
 						<% outfit.items.map do |item| %>
-						<div class="small_draggable2" data-item-id='<%= item.id %>' data-top='<%= item.closets.find_by(outfit_id: outfit.id).y_coordinate %>' data-left='<%= item.closets.find_by(outfit_id: outfit.id).x_coordinate %>' data-height='<%= item.closets.find_by(outfit_id: outfit.id).height %>' data-width='<%= item.closets.find_by(outfit_id: outfit.id).width %>'>
-						<%= image_tag item.picture, class: "imageUpload" %>	
+							<div class="small_draggable2" data-item-id='<%= item.id %>' data-top='<%= item.closets.find_by(outfit_id: outfit.id).y_coordinate %>' data-left='<%= item.closets.find_by(outfit_id: outfit.id).x_coordinate %>' data-height='<%= item.closets.find_by(outfit_id: outfit.id).height %>' data-width='<%= item.closets.find_by(outfit_id: outfit.id).width %>'>
+								<%= image_tag item.picture, class: "imageUpload" %>	
+							</div>
+						<% end %>
 					</div>
-					<% end %>
 				</div>
-			</div>
-					<% end %>
-			</div>
-			
-			 <div class="comments1">
-								<h4>COMMENTS</h4>
-			  				<div class="comments-main">
-									<div class="col-md-2 cmts-main-left">
-										<img src="images/avatar.png" alt="">
-									</div>
-									<div class="col-md-10 cmts-main-right">
-										<h5>TOM BROWN</h5>
-										<p>Vivamus congue turpis in augue pellentesque scelerisque. Pellentesque aliquam laoreet sem nec ultrices. Fusce blandit nunc vehicula massa vehicula tincidunt. Nam venenatis cursus urna sed gravida. Ut tincidunt elit ut quam malesuada consequat. Sed semper purus sit amet lorem elementum faucibus.</p>
-										<div class="cmts">
-											<div class="cmnts-left">
-												<p>On April 14, 2014, 18:01</p>
-											</div>
-											<div class="cmnts-right">
-												<a href="#">Reply</a>
-											</div>
-											<div class="clearfix"></div>
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-			  				</div>
-								
-								
-								
-			<div class="lev">
-			<div class="leave">
-				<h4>Leave a comment</h4>
-				</div>
-				<form id="commentform">
-				    <label for="author">Name</label>
-						<input id="author" name="author" type="text" value="" size="30" aria-required="true">
-						<label for="email">Email</label>
-						<input id="email" name="email" type="text" value="" size="30" aria-required="true">
-						<label for="url">Website</label>
-						<input id="url" name="url" type="text" value="" size="30">
-						<label for="comment">Comment</label>
-						<textarea></textarea>
-					 <div class="clearfix"></div>
-			           <input name="submit" type="submit" id="submit" value="Send">
-					<div class="clearfix"></div>
-				   </form>
-				  </div>
-				  
+			<% end %>
 		</div>
-	</div>
-	
-<!-- footer -->
-	<div class="footer">
-		<div class="container">
-			<div class="col-md-3 copy">
-				<div class="top1">
-					<i class="ham"></i>
-				</div>
-				<div class="top2">
-					<h6>Copyrights © 2015 Graphic</h6>
-					<p>All rights reserved</p>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="col-md-3 copy">
-				<div class="top1">
-					<i class="men"></i>
-				</div>
-				<div class="top2">
-					<h6>Template by: </h6>
-					<p><a href="http://w3layouts.com/">W3layouts</a></p>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="col-md-3 copy">
-				<div class="top1">
-					<i class="app"></i>
-				</div>
-				<div class="top2">
-					<h6>Images From: </h6>
-					<p><a href="#"> www.wallcoo.net</a></p>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="col-md-3 copy">
-				<div class="top1">
-					<i class="lik"></i>
-				</div>
-				<div class="top2">
-					<h6>Website </h6>
-					<p><a href="#"> www.yourblog.com</a></p>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-	</div>
-<!-- footer -->
+					  
+</div>
+
+

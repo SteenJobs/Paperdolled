@@ -18,6 +18,20 @@ body a{
 	-o-transition:0.5s all;
 	-ms-transition:0.5s all;
 }
+
+.profile {
+	margin-right: 30px;
+	margin-left: 30px;
+}
+
+p.adm {
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.l_g_r {
+	height: 50%;
+}
 .header {
 	padding: 2em 0;
 	border-bottom: 1px solid #6f879a;

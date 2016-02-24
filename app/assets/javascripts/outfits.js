@@ -5,7 +5,7 @@ var lastClicked;
 
 // Ajax pagination
 $(function () {
-	$('.pagination').on("click", 'a', function (e) {
+	$('#page_links').on("click", 'a', function (e) {
 		$.get(this.href, null, loadJS, 'script');
 		return false;
   });
@@ -124,7 +124,7 @@ function loadJS () {
   $(".draggable").on("click", function() {
   	var image = $(this).find("img.imageUpload");
   	var info = $(this).find("div.item_info");
-  	if (myDialog.find("img.imageUpload") != image || myDialog.find("dv.item_info") != info) {
+  	if (myDialog.find("img.imageUpload") != image || myDialog.find("div.item_info") != info) {
       myDialog.empty("img.imageUpload");  
       myDialog.empty("div.item_info");
   		myDialog.append(image.clone());

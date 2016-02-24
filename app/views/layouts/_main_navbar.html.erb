@@ -1,0 +1,45 @@
+<div class="jumbotron" id='main-jumbotron'>
+
+  	<h2 class='text-center', style="color: black;">Paperdolled</h2>
+  	<br>
+	<div class="btn-group btn-group-justified main-nav-group" role="group" aria-label="...">
+	  <div class="btn-group" role="group">
+	  	<%= link_to(users_path) do %>
+	    	<button type="button" class="btn btn-default main-nav-buttons">
+	    		HOME
+	    	</button>
+	    <% end %>
+	  </div>
+	  <div class="btn-group" role="group">
+	  	<%= link_to('#') do %>
+	    	<button type="button" class="btn btn-default main-nav-buttons">
+	    		ABOUT
+	    	</button>
+	    <% end %>
+	  </div>
+	  <% if current_user %>
+	  	<div class="btn-group" role="group">
+	  		<%= link_to(user_path(current_user.id)) do %>
+	  	  	<button type="button" class="btn btn-default main-nav-buttons">
+	  	  		PROFILE
+	  	  	</button>
+	  	  <% end %>
+	  	</div>
+	  <% end %>
+	  <div class="btn-group" role="group">
+	  	<%= link_to('#') do %>
+	    	<button type="button" class="btn btn-default main-nav-buttons">
+				GALLERY
+	    	</button>
+	    <% end %>
+	  </div>
+	  <div class="btn-group" role="group">
+	    <%= link_to(new_outfit_path) do %>
+	    	<button type="button" class="btn btn-default main-nav-buttons">
+	    		CREATE
+	    	</button>
+	    <% end %>
+	  </div>
+	</div>
+
+</div>
