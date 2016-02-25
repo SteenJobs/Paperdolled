@@ -59,23 +59,38 @@ class User < ActiveRecord::Base
 
   # Find user responses for scenarios
   def self.list_answers(user)
-    responses = []
+    # responses = []
+    sub_responses = {}
 	  user.scenarios.limit(1).reverse.map do |scenario| 
-      sub_responses = []
-      sub_responses << scenario.answers.first.option.event.dress_me_for
+      sub_responses["Event"] = scenario.answers.first.option.event.dress_me_for
 		  scenario.answers.map do |answer|
         options = Option.all.find_by(id: answer.option_id)
-        sub_responses << options.possible_response if !options.nil?
-        if answer.date.present?
-          sub_responses << answer.date
-        end
-        if answer.type_in.present?
-          sub_responses << answer.type_in
+        #sub_responses << options.possible_response if !options.nil?
+        #response = options.possible_response if !options.nil?
+        if !options.nil?
+          case options.question_type
+          when "And:"
+            sub_responses["And"] = options.possible_response if !options.nil?
+          when "Also:"
+            sub_responses["Also"]= options.possible_response if !options.nil?
+          when "With:"
+            sub_responses["With"] = options.possible_response if !options.nil?
+          end
+          if answer.date.present?
+            sub_responses["Date"] = answer.date
+          end
+          if answer.type_in.present?
+            sub_responses["Other"] = answer.type_in
+          end
         end
       end
-      responses << sub_responses
+      #responses << sub_responses
 		end
-    responses
+    #responses
+    sub_responses.default = "-----"
+    responses = []
+    responses << sub_responses
+    return responses
   end 
 
 

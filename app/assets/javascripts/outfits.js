@@ -141,7 +141,7 @@ function loadJS () {
   // Handles only around selected	
   
   $(document).on("click", function(e) {
-  	console.log("clicked!")
+  	
   	var handle = $('.ui-resizable-handle')
   	// lastClicked = $(e.target)		
     $('.draggable2').find('.ui-resizable-handle').hide();
@@ -152,13 +152,13 @@ function loadJS () {
   		handle.hide()
     }
   	// lastClicked.toggleClass('last_clicked')
-  	console.log(lastClicked)
+  	
   });
   
   // Disappear if dragged out of canvas
   
   function removeItem(event, ui) {
-		console.log(ui)
+	
       $(ui.helper).fadeOut(100, function () {
           $(this).remove();
       });
@@ -171,7 +171,7 @@ function loadJS () {
   	var dropElem = ui.draggable.get(0)
   	var clone = $(dropElem).clone()
   	var cloneClass = $(clone).attr('class')
-  	console.log(cloneClass)
+ 
   	if (cloneClass != newClass) {
   		clone.attr('class', 'draggable2');
   		// position of the draggable minus position of the droppable

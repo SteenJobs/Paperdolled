@@ -15,16 +15,16 @@
 #   user.picture = Faker::Avatar.image
 # end
 
-99.times do |n|
+15.times do |n|
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
-  picture = Faker::Avatar.image
+  picture = Faker::Avatar.image("random-slug", "300x200").gsub('http://','https://')
   bio = Faker::Lorem.sentences
   User.create!(first_name:            first_name,
                last_name:             last_name,
                email:                 "#{first_name}.#{last_name}#{n+1}@gmail.com",
-               password:              "password",
-               password_confirmation: "password",
+               password:              "foobar",
+               password_confirmation: "foobar",
                bio:                   bio.join(" "),
                remote_picture_url:    picture)               
 end
@@ -76,7 +76,7 @@ end
 
 require 'csv'
 
-c = CSV.read('/Users/jesiegel2000/Desktop/Event_matrix.csv', {headers: true})
+c = CSV.read("#{Rails.root}/Event_matrix.csv", {headers: true})
   c.each do |row|
     array = row.to_a
     occasion = array[0][1]
