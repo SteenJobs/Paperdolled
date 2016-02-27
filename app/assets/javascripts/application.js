@@ -20,5 +20,6 @@
 //= require redactor-rails
 //= require bootstrap-datepicker
 //= require masonry.pkgd.min.js
+//= require bootstrap-editable.min.js
 //= require turbolinks
 //= require_tree .

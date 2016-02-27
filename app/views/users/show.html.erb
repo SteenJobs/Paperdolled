@@ -1,91 +1,95 @@
 <div class="container-fluid">
+<div class="jumbotron" id='main-jumbotron'>
 	<%= render "layouts/main_navbar" %>
-		<div class="row">
-			<div class="col-md-12">
-				<%= render 'answers' %>
-			</div>
+	</div>
+	<div class="row text-center center-block">
+		<div class="col-md-10 col-md-offset-1">
+			<%= render 'answers' %>
 		</div>
+	</div>
 
-		<div class="row" id="profile">
-			<div class="det_pic">
-			  <%= image_tag(@user.picture) if @user.picture? %>
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col-md-4 col-centered">
-				<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put, :multipart => true}) do |f| %>
-
-					<%= devise_error_messages! %><!--Check to make sure this works-->
-				
-			  		<div class="form-group">
-						<label><%= f.label :picture %></label><br />
-						<%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
-						<%= f.hidden_field :picture_cache %>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<div class="well">
+				<div class="row" style="padding: 0px;">
+					<div class="col-md-12">
+						<h5>My Profile</h5>
+						<hr style="border-color: black;">
 					</div>
-
-					<div class="form-group">
-			    		<%= f.submit "Update", class: "btn btn-primary" %>
-					</div>
-				
-		  		<% end %>
-			</div>
-		</div>
-			
-		<script type="text/javascript">
-		  $('#picture').bind('change', function() {
-		    var size_in_megabytes = this.files[0].size/1024/1024;
-		    if (size_in_megabytes > 5) {
-		      alert('Maximum file size is 5MB. Please choose a smaller file.');
-		    }
-		  });
-		</script>
-			
-		
-		<div class="row">
-			<div class="col-md-6 col-centered">
-				<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put, :multipart => true}) do |f| %>
-		
-					<div id="bio" name="user[bio]" class="text-center" >
-						<%= sanitize @user.bio %>
-					</div>
-					
-					<p id="btn-save" style="display: none;">
-					   	<%= f.submit "Save", onclick: "saveRedactor();" %></button>
-					</p>
-		
-				<% end %>
-			</div>
-		</div>
-	
-		<br>
-
-		<div class="row"></div>
-	
-		<div class="row users" id="scenario">	
-			<% User.list_answers(current_user).each do |scenario| %>
-				<div class="col-md-4 well each_scenario">						
-					<% scenario.each do |answer| %>							
-						<p><%= answer %></p>
-					<% end %>						
 				</div>
-			<% end %>
-		</div>
-			
-		<div class="row users" id="outfit">
-			<% @user.outfits.map do |outfit| %>
-				<div class="col-md-4">
-					<div class="small_outfit_canvas">
-						<% outfit.items.map do |item| %>
-							<div class="small_draggable2" data-item-id='<%= item.id %>' data-top='<%= item.closets.find_by(outfit_id: outfit.id).y_coordinate %>' data-left='<%= item.closets.find_by(outfit_id: outfit.id).x_coordinate %>' data-height='<%= item.closets.find_by(outfit_id: outfit.id).height %>' data-width='<%= item.closets.find_by(outfit_id: outfit.id).width %>'>
-								<%= image_tag item.picture, class: "imageUpload" %>	
+				<div class="row">
+					<div class="col-md-6">
+			  			<%= @user.picture? ? image_tag(@user.picture) : image_tag("http://placehold.it/300x300", style: "height: auto; width: 100%; margin: 0px;")%>
+
+			  			<br>
+
+			  			<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put, :multipart => true}) do |f| %>
+
+							<%= devise_error_messages! %><!--Check to make sure this works-->
+				
+			  				<div class="form-group">
+								<%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+								<%= f.hidden_field :picture_cache %>
 							</div>
-						<% end %>
+
+							<div class="form-group">
+			    				<%= f.submit "Update", class: "btn btn-primary" %>
+							</div>
+		  				<% end %>
+
+					</div>
+					<div class="col-md-6">
+						<h5><strong><%= @user.first_name + " " + @user.last_name %></strong></h5>
+						<hr style="border-color: black;">
+						<p>Age: <%= link_to(@user.age.nil? ? "Write something here!" : "#{@user.age}", "#", remote: true, :"data-url" => user_update_path(id: @user.id), id: :bio, :'data-name' => :age, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
+						<p>Style Likes: <%= link_to(@user.style_likes.nil? ? "Write something here!" : "#{@user.style_likes}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :style_likes, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
+						<p>Style Dislikes: <%= link_to(@user.style_dislikes.nil? ? "Write something here!" : "#{@user.style_dislikes}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :style_dislikes, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
+						<p>Style Icon: <%= link_to(@user.style_icon.nil? ? "Write something here!" : "#{@user.style_icon}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :style_icon, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
 					</div>
 				</div>
-			<% end %>
+		
+			
+				<script type="text/javascript">
+				  $('#picture').bind('change', function() {
+				    var size_in_megabytes = this.files[0].size/1024/1024;
+				    if (size_in_megabytes > 5) {
+				      alert('Maximum file size is 5MB. Please choose a smaller file.');
+				    }
+				  });
+				</script>
+			
+				<!--
+				<div class="row">
+					<div class="col-md-6 col-centered">
+				
+						<%= link_to(@user.bio.nil? ? "Please fill out your bio" : "#{@user.bio}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :bio, :"data-type" => "textarea", style: "border-bottom: none; color: black; font-size: 20px;") %>
+					
+				
+					</div>
+				</div>
+				-->
+
+			</div>
 		</div>
-					  
+	</div>
+			
+	<% @user.outfits.in_groups_of(3, false).each do |group| %>		
+	<div class="row" style="background-color:<%= cycle('black', 'white') -%>; padding-bottom: 30px;" id="outfit">
+	<div class="col-md-8 col-md-offset-2">
+		<% group.each do |outfit| %>
+			<div class="col-md-4">
+				<div class="small_outfit_canvas" style="background-color: white;">
+					<% outfit.items.map do |item| %>
+						<div class="small_draggable2" data-item-id='<%= item.id %>' data-top='<%= item.closets.find_by(outfit_id: outfit.id).y_coordinate %>' data-left='<%= item.closets.find_by(outfit_id: outfit.id).x_coordinate %>' data-height='<%= item.closets.find_by(outfit_id: outfit.id).height %>' data-width='<%= item.closets.find_by(outfit_id: outfit.id).width %>'>
+							<%= image_tag item.picture, class: "imageUpload" %>	
+						</div>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	</div>
+	<% end %>		  
 </div>
 
 

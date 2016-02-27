@@ -2,6 +2,7 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://coffeescript.org/
 
+/*
 $(function()
 {		
     $('#bio').on('click', loadRedactor);
@@ -41,9 +42,25 @@ function saveRedactor()
     $('#bio').redactor('core.destroy');
     $('#btn-save').hide();
 }
-
+*/
 
 $(document).ready(function () {
+    //turn to inline mode
+    $.fn.editable.defaults.mode = 'inline';
+    $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
+    $("#bio, #age, #styleLikes, #styleDislikes, #styleIcon").editable({
+        send: 'always',
+        ajaxOptions: {
+            type: 'put',
+            dataType: 'html'
+        },
+        success: function(response, newValue) {
+            if(response.status == 'error') return response.msg; //msg will be shown in editable form
+        },
+        error: function(response, newValue) {
+            console.log(response)
+        }
+    });
 
     /*
     // Masonry init
@@ -83,13 +100,13 @@ $(document).ready(function () {
 
 
 // script-for-nav 
-
+/*
 		$( "span.menu" ).click(function() {
 		  $( ".head-nav ul" ).slideToggle(300, function() {
 			// Animation complete.
 		  });
 		});
-
+*/
 	
 // script-for-textarea
 	

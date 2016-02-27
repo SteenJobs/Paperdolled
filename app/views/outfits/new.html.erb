@@ -1,21 +1,33 @@
-<div class="container" id="outfit_container">
+<div class="container-fluid">
+<div class="jumbotron" id='main-jumbotron' style="padding-bottom: 0px; padding-top: 0px;">
+	<%= render "layouts/main_navbar" %>
+</div>
+</div>
+<div class="container-fluid" style="padding-top: 0px;">
 
 <div class="row">
-	<div class="col-md-7">
-	<div id="outfit_canvas">
+	<div class="col-md-6">
+	<div id="outfit_canvas" class="big-canvas" style="width: 100%;">
+	<div class="well" style="height: 100%;, width: 100%; border-color: black;">
+	</div>
 	</div>
 	<br>
 	<%= button_to "Create", closets_path, remote: true, id: "outfits_button" %>
 </div>
 
 
-	<div class="col-md-5 well" id="outfits_well">
-
+	<div class="col-md-6">
+	<div id="outfits_well" class="big-canvas" style="width: 100%;">
+	
 		<%= render 'outfits' %>
 
 	</div>
+
+		<%= will_paginate @items, id: "page_links", style: "margin-top: 0px;" %>
+
+
 		
-			<%= will_paginate @items, id: "page_links" %>
+			
 		
 		<div id="dialog" title="Basic dialog">
 		</div>

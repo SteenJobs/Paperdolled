@@ -13,5 +13,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @answer = Answer.new
     @options = Option.all
+    @disabled = @user == current_user ? false : true
   end
 end

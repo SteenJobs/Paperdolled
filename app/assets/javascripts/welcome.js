@@ -7,12 +7,12 @@ $(document).ready(function () {
 	var matchingButton = $(".main-nav-group").find(".main-nav")
 	$('a[href="'+currentURL+'"]').children().addClass('active')
 
-	/*
+	
 	$(".main-nav-buttons").on("click", function() {
    		$(".main-nav-group").find(".active").removeClass("active");
    		$(this).addClass("active");
 	});
-	*/
+	
 
 });
 

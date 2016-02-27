@@ -17,19 +17,19 @@
 }
 
 .draggable {
-    border: 1px solid #000000;
+    //border: 1px solid #000000;
     overflow: visible;
 		display: inline-block;
 		margin-left: auto;
 		margin-right: auto;
 		position: relative;
 		padding: 0px;
-		width: 100% !important;
-		height: 100% !important;
+		width: auto !important;
+		height: 100px !important;
 }
 
 .draggable2 {
-    border: 1px solid #000000;
+    //border: 1px solid #000000;
     overflow: visible;
 		position: absolute !important;
 		min-width: 100px !important;
@@ -42,15 +42,15 @@
 }
 
 
-#outfit_canvas {
+.big-canvas {
 	width: 750px; 
-	height: 800px; 
-	border: 1px solid #000000;
+	height: 600px; 
+	//border: 1px solid #000000;
 }
 
 .draggable img {
-	width: 100%;
-	height: 100%;
+	width: auto;
+	height: 100px;
 	display: block;
 	line-height: 0px;
 	position: relative;

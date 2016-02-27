@@ -49,8 +49,8 @@ ul#questions {
 }
 
 .small_outfit_canvas {
-	width: 375px; 
-	height: 400px; 
+	width: 256px;//375px; 
+	height: 269px;//400px; 
 	border: 1px solid #000000;
 }
 
@@ -61,7 +61,7 @@ ul#questions {
 }
 
 .small_draggable {
-    border: 1px solid #000000;
+    //border: 1px solid #000000;
     overflow: visible;
 		display: inline-block;
 		margin-left: auto;
@@ -73,7 +73,7 @@ ul#questions {
 }
 
 .small_draggable2 {
-    border: 1px solid #000000;
+    //border: 1px solid #000000;
     overflow: visible;
 		position: absolute !important;
 }

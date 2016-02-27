@@ -1,16 +1,24 @@
 Rails.application.routes.draw do
   mount RedactorRails::Engine => '/redactor_rails'
   
-  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :registrations => "registrations" }
+  
   devise_scope :user do
     # using login path for registration
-    get '/login' => 'registrations#new', :as => :new_user_signup
-    post '/sign_up' => 'registrations#create', :as => :user_signup
-    post '/sign_in' => 'devise/sessions#create', :as => :user_login
+    #get '/login' => 'registrations#new', :as => :new_user_signup
+    #post '/sign_up' => 'registrations#create', :as => :user_signup
+    #post '/sign_in' => 'devise/sessions#create', :as => :user_login
+    get "/" => "registrations#new"
+    get 'users/sign_in', to: redirect('/')
+    get 'users/sign_up', to: redirect('/')
+    put '/update' => "registrations#update", as: "user_update"
+    get 'users/:id' => "users#show", as: "user_show"
   end
 
-  get 'users/auth/:provider/callback' => 'authentications#create'
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :registrations => "registrations" }
+  get '/auth/:provider/callback' => 'authentications#create'
   get '/auth/:provider/signout' => 'authentications#signout'
+
 
   
   # The priority is based upon order of creation: first created -> highest priority.
