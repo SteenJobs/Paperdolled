@@ -24,7 +24,7 @@ class AnswersController < ApplicationController
     end
     
     if new_scenario.save
-      flash['notice'] = "Scenario created!" # Check color
+      flash['notice'] = "Event updated!" # Check color
       redirect_to user_path(current_user)
     else
       render 'new'

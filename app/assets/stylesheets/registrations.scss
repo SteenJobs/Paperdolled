@@ -13,6 +13,15 @@
   }
 }
 
+iframe {
+	margin: 0 auto 0 auto;
+}
+
+.fb_iframe_widget iframe {
+	position: relative !important;
+	margin: 0 auto 0 auto;
+	width: 100% !important;
+}
 
 .panel-login {
 	border-color: #ccc;

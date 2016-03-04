@@ -419,64 +419,7 @@ i.lik {
 .footer a:hover {
 	color: #556a7f;
 }
-/*--about--*/
-.about {
-	background: #f5f6f7;
-	padding: 3em 0;
-}
-.biographys {
-	margin-top: 2em;
-	background: #fff;
-	padding: 2em 1.5em;
-	box-shadow: 0px 1px 4px 0px rgba(104, 123, 144, 0.31);
-	border-radius: 0.3em;
-}
-.about h2 {
-	color: #556a7f;
-	font-size: 3em;
-	margin: 0em;
-	font-weight: 700;
-	text-align:center;
-}
-.biography {
-	padding: 1em 0;
-}	
-.biography-info {
-	margin-bottom: 2em;
-}
-.biography-into h4 {
-	color: #556a7f;
-	font-size: 1.5em;
-	margin-bottom: 0.5em;
-	font-weight: 700;
-}
-.biography-into p {
-	color: #868f98;
-	font-weight: 400;
-	font-size: 1em;
-	line-height: 1.8em;
-	margin-bottom: 1em;
-}
-.biography-info-right {
-	border: none;
-	outline: 0;
-	color: #fff;
-	background:#ffc000;
-	padding:0.3em 1.5em 0.5em;
-	transition: 0.5s all;
-	-webkit-transition: 0.5s all;
-	-moz-transition: 0.5s all;
-	-o-transition: 0.5s all;
-	-ms-transition: 0.5s all;
-	font-size: 1.2em;
-	font-weight: 400;
-}
-.biography-info-right:hover {
-	background-color:#736f72;
-	color: #fff;
-	text-decoration: none;
-}
-/*--/about--*/
+
 /*-- portfolio --*/
 .photos {
 	background: #f5f6f7;

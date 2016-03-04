@@ -1,11 +1,6 @@
 <div class="container-fluid">
-<div class="jumbotron" id='main-jumbotron'>
-	<%= render "layouts/main_navbar" %>
-	</div>
-	<div class="row text-center center-block">
-		<div class="col-md-10 col-md-offset-1">
-			<%= render 'answers' %>
-		</div>
+	<div class="jumbotron" id='main-jumbotron'>
+		<%= render "layouts/main_navbar" %>
 	</div>
 
 	<div class="row">
@@ -13,16 +8,26 @@
 			<div class="well">
 				<div class="row" style="padding: 0px;">
 					<div class="col-md-12">
-						<h5>My Profile</h5>
+						<h5 style="display: inline-block; margin-top:10px;">My Profile</h5>
+						<%= link_to destroy_user_session_path, method: :delete do %>
+						<button type="button" class="btn btn-primary paperdolled-warning-button-outline pull-right">
+						  Log Out
+						</button>
+						<% end %>
 						<hr style="border-color: black;">
+						
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-			  			<%= @user.picture? ? image_tag(@user.picture) : image_tag("http://placehold.it/300x300", style: "height: auto; width: 100%; margin: 0px;")%>
-
+			  			<%= @user.picture? ? image_tag(@user.picture, style: "height: auto; width: 100%; max-width: 550px; max-height: 550px;") : image_tag("http://placehold.it/300x300", style: "height: auto; width: 100%; max-width: 550px; max-height: 550px; margin: 0px;")%>
 			  			<br>
 
+			  			<button type="button" class="btn btn-primary paperdolled-button-outline center-block" id="upload-button">
+						  Upload
+						</button>	
+
+			  			<div id="profile-pic" class="center-block" style="display: none;">
 			  			<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put, :multipart => true}) do |f| %>
 
 							<%= devise_error_messages! %><!--Check to make sure this works-->
@@ -33,18 +38,49 @@
 							</div>
 
 							<div class="form-group">
-			    				<%= f.submit "Update", class: "btn btn-primary" %>
+			    				<%= f.submit "Update", class: "btn btn-primary paperdolled-button" %>
+			    				<button type="button" class="btn btn-danger" id="close-button">Close</button>
 							</div>
 		  				<% end %>
-
+		  				</div>
 					</div>
 					<div class="col-md-6">
 						<h5><strong><%= @user.first_name + " " + @user.last_name %></strong></h5>
 						<hr style="border-color: black;">
-						<p>Age: <%= link_to(@user.age.nil? ? "Write something here!" : "#{@user.age}", "#", remote: true, :"data-url" => user_update_path(id: @user.id), id: :bio, :'data-name' => :age, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
-						<p>Style Likes: <%= link_to(@user.style_likes.nil? ? "Write something here!" : "#{@user.style_likes}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :style_likes, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
-						<p>Style Dislikes: <%= link_to(@user.style_dislikes.nil? ? "Write something here!" : "#{@user.style_dislikes}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :style_dislikes, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
-						<p>Style Icon: <%= link_to(@user.style_icon.nil? ? "Write something here!" : "#{@user.style_icon}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :style_icon, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
+						<div class="row">
+						<div class="col-md-6">
+							<p>Age: <%= link_to(@user.age.nil? ? "Write something here!" : "#{@user.age}", "#", remote: true, :"data-url" => user_update_path(id: @user.id), id: :bio, :'data-name' => :age, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
+							<p>Style Likes: <%= link_to(@user.style_likes.nil? ? "Write something here!" : "#{@user.style_likes}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :style_likes, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
+							<p>Style Dislikes: <%= link_to(@user.style_dislikes.nil? ? "Write something here!" : "#{@user.style_dislikes}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :style_dislikes, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
+							<p>Style Icon: <%= link_to(@user.style_icon.nil? ? "Write something here!" : "#{@user.style_icon}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :style_icon, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
+							<br>
+						</div>
+						<div class="col-md-6">
+							<p>Event: <%= @scenario["Event"] %></p>
+							<p>And: <%= @scenario["And"] %></p>
+							<p>Also: <%= @scenario["Also"] %></p>
+							<p>With: <%= @scenario["With"] %></p>
+							<p>Date: <%= @scenario["Date"] %></p>
+							<p>Other: <%= @scenario["Other"] %></p>
+						</div>
+						</div>
+						<div class="row">
+						<div class="col-md-6">
+							<%= link_to "Doll me up", new_user_outfit_path(@user), class: "btn btn-default", style: "background-color: #cabe97; border-color: transparent; color: #af9b58; width:55%;" %>
+						</div>
+						<div class="col-md-6">
+							<% if can? :update, @user %>
+								<button type="button" class="btn btn-primary paperdolled-button text-center" style="width:55%;" data-toggle="modal" data-target="#myModal">
+								  Plan for an event!
+								</button>
+							<% end %>
+						</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-md-offset-6">
+						
 					</div>
 				</div>
 		
@@ -73,11 +109,12 @@
 		</div>
 	</div>
 			
-	<% @user.outfits.in_groups_of(3, false).each do |group| %>		
+	<% @outfits.in_groups_of(3, false).each do |group| %>		
 	<div class="row" style="background-color:<%= cycle('black', 'white') -%>; padding-bottom: 30px;" id="outfit">
 	<div class="col-md-8 col-md-offset-2">
 		<% group.each do |outfit| %>
 			<div class="col-md-4">
+			<%= link_to user_outfit_path(@user, outfit) do %>
 				<div class="small_outfit_canvas" style="background-color: white;">
 					<% outfit.items.map do |item| %>
 						<div class="small_draggable2" data-item-id='<%= item.id %>' data-top='<%= item.closets.find_by(outfit_id: outfit.id).y_coordinate %>' data-left='<%= item.closets.find_by(outfit_id: outfit.id).x_coordinate %>' data-height='<%= item.closets.find_by(outfit_id: outfit.id).height %>' data-width='<%= item.closets.find_by(outfit_id: outfit.id).width %>'>
@@ -85,6 +122,10 @@
 						</div>
 					<% end %>
 				</div>
+			<% end %>
+				<p style="color:<%= cycle('white', 'white', 'white', 'black', 'black', 'black') -%>;">
+					Stylist: <%= outfit.stylist.first_name + " " + outfit.stylist.last_name %>
+				</p>
 			</div>
 		<% end %>
 	</div>
@@ -92,4 +133,23 @@
 	<% end %>		  
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Select all relevant options.</h4>
+      </div>
+      <div class="modal-body">
+        <%= render 'answers' %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
 

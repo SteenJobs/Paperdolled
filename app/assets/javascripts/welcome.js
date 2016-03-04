@@ -13,6 +13,7 @@ $(document).ready(function () {
    		$(this).addClass("active");
 	});
 	
+	$( ".login-panel" ).draggable();
 
 });
 

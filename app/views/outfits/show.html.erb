@@ -1,0 +1,24 @@
+<div class="container-fluid">
+	<div class="jumbotron" id='main-jumbotron' style="padding-bottom: 0px; padding-top: 0px;">
+		<%= render "layouts/main_navbar" %>
+	</div>
+</div>
+
+<div class="container-fluid" style="height: 100%; padding-top: 0px;">
+	<div class="row" style="height: 100%; padding-top: 0px;">
+		<div class="col-md-12" style="height: 100%;">
+			<div class="panel panel-default center-block" style="height: 90vh; width: 107vh; max-width: 100%; border-width: 2px;">
+				<div class="panel-body outfit-display-panel" style="height: 100%; width: 100%;">
+					<% @items.map do |item| %>
+						<div class="small_draggable2" data-item-id='<%= item.id %>' data-top='<%= item.closets.find_by(outfit_id: @outfit.id).y_coordinate %>' data-left='<%= item.closets.find_by(outfit_id: @outfit.id).x_coordinate %>' data-height='<%= item.closets.find_by(outfit_id: @outfit.id).height %>' data-width='<%= item.closets.find_by(outfit_id: @outfit.id).width %>'>
+							<%= image_tag item.picture, class: "imageUpload" %>	
+						</div>
+					<% end %>
+				</div>
+			</div>
+			<% if can? :destroy, @outfit %>
+				<%= button_to 'Delete', user_outfit_path(@user, @outfit), method: :delete, data: { confirm: "Are you sure you would like to delete this outfit?" }, title: "Delete", class: "center-block paperdolled-button", style: 'width:107vh; max-width:100%;border-radius: 3px;' %>
+			<% end %>
+		</div>
+	</div>
+</div>

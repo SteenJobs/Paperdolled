@@ -23,11 +23,11 @@ $(function () {
 			var width = $(this).width() / $('#outfit_canvas').width();
 			var item_id = $(this).data().itemId;
 			var outfit_id = $(this).data().outfitId;
-		  var object = {item_id: item_id, x_coordinate: x_coordinate, y_coordinate: y_coordinate, height: height, width: width};
+		  var object = {styled_id: userId, item_id: item_id, x_coordinate: x_coordinate, y_coordinate: y_coordinate, height: height, width: width};
 			array.push(object)
 		});
 		$.post(
-			"/closets",
+			"/users/"+userId+"/closets",
 			{object: array},
 			function(data) {
 			  window.location = data.location
@@ -221,6 +221,28 @@ function loadJS () {
 
 $(document).ready(function () {
 	
+    $(function () {
+      var boards = $('.outfit-display-panel')
+      boards.each(function() { 
+        var canvas = $(this);
+        canvas.children('.small_draggable2').each(function () { 
+          var obj = $(this);
+          var width = obj.data().width;
+          var height = obj.data().height;
+          var canvasHeight = canvas.height();
+          var canvasWidth = canvas.width();
+          var newHeight = height * canvasHeight;
+          var newWidth = width * canvasWidth;
+          obj.height(newHeight);
+          obj.width(newWidth);
+          var offsetX = obj.data().left;
+          var offsetY = obj.data().top;
+          var PosX = (offsetX * canvasWidth) + canvas.offset().left;
+          var PosY = (offsetY * canvasHeight) + canvas.offset().top;
+          obj.offset({ top: PosY, left: PosX });
+        });
+      });
+    });
 
 		loadJS();
 

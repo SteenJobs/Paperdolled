@@ -21,5 +21,10 @@
 //= require bootstrap-datepicker
 //= require masonry.pkgd.min.js
 //= require bootstrap-editable.min.js
-//= require turbolinks
+//= require facebook_SDK.js
+//= require jquery.ba-outside-events.min.js
+//= require jquery.swipebox.min.js
+//= require jquery.jscroll.min.js
+//= require jquery.lazyload-any.min.js
+//= require data-confirm-modal
 //= require_tree .

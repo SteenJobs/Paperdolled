@@ -45,6 +45,21 @@ function saveRedactor()
 */
 
 $(document).ready(function () {
+
+    $('.lazyload').lazyload({
+        // Sets the pixels to load earlier. Setting threshold to 200 causes image to load 200 pixels
+        // before it appears on viewport. It should be greater or equal zero.
+        threshold: 200,
+        
+        // Sets the callback function when the load event is firing.
+        // element: The content in lazyload tag will be returned as a jQuery object.
+        load: function(element) {},
+        
+        // Sets events to trigger lazyload. Default is customized event `appear`, it will trigger when
+        // element appear in screen. You could set other events including each one separated by a space.
+        trigger: "appear"
+    });
+
     //turn to inline mode
     $.fn.editable.defaults.mode = 'inline';
     $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
@@ -62,6 +77,28 @@ $(document).ready(function () {
         }
     });
 
+    $("#upload-button").on("click", function(event) {
+        showUpload();
+    });
+
+    $("#close-button").on("click", function(event) {
+        showUpload();
+    });
+
+    function showUpload() {
+        var element = $('#profile-pic')
+        var uploadButton = $('#upload-button')
+
+        if (!element.is(":visible")) {
+            element.show();
+            uploadButton.hide();
+        } else {
+            element.hide();
+            uploadButton.show();
+        }
+    }
+
+    $('.scroll').jscroll();
     /*
     // Masonry init
         // init Isotope

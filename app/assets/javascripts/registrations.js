@@ -4,6 +4,7 @@
 
 $(document).ready(function () {
 	
+	/*
 	$(function() {
 		
 		if (window.location.pathname == "/sign_in") {
@@ -41,5 +42,6 @@ $(document).ready(function () {
 			e.preventDefault();
 		});
 	});
+	*/
 });
 

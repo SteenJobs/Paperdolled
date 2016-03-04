@@ -12,7 +12,7 @@
 	</div>
 	</div>
 	<br>
-	<%= button_to "Create", closets_path, remote: true, id: "outfits_button" %>
+	<%= button_to "Create", user_closets_path(params[:user_id]), remote: true, class: "paperdolled-button center-block", id: "outfits_button", style: "width: 90%;border-radius:3px;" %>
 </div>
 
 
@@ -23,11 +23,11 @@
 
 	</div>
 
-		<%= will_paginate @items, id: "page_links", style: "margin-top: 0px;" %>
+		<%= will_paginate @items, id: "page_links", style: "margin-top: 0px;", class: "center-block text-center" %>
 
 
 		
-			
+		<%= javascript_tag "var userId = #{params[:user_id]};" %>	
 		
 		<div id="dialog" title="Basic dialog">
 		</div>
