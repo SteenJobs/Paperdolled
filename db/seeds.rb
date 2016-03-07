@@ -19,6 +19,7 @@
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
   response = HTTParty.get('http://uifaces.com/api/v1/random')
+  puts response
   hash = JSON.parse response.body
   picture = hash['image_urls']['epic']
   User.create!(first_name:            first_name,
