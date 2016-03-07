@@ -1,4 +1,4 @@
-require 'pry'
+
 
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook

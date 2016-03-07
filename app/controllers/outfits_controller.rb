@@ -1,4 +1,4 @@
-require 'pry'
+
 
 class OutfitsController < ApplicationController
   def new

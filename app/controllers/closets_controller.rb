@@ -1,4 +1,3 @@
-require 'pry'
 class ClosetsController < ApplicationController
   def create
     user = User.find(params[:user_id])
