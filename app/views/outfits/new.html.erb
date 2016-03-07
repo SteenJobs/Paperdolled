@@ -1,0 +1,37 @@
+<% provide(:title, "Doll Me Up") %>
+
+<div class="container-fluid">
+<div class="jumbotron" id='main-jumbotron' style="padding-bottom: 0px; padding-top: 0px;">
+	<%= render "layouts/main_navbar" %>
+</div>
+</div>
+<div class="container-fluid" style="padding-top: 0px;">
+
+<div class="row">
+	<div class="col-md-6">
+	<div id="outfit_canvas" class="big-canvas" style="width: 100%;">
+	<div class="well" style="height: 100%;, width: 100%; border-color: #cabe97;">
+	</div>
+	</div>
+	<br>
+	<%= button_to "Create", user_closets_path(params[:user_id]), remote: true, class: "paperdolled-button center-block", id: "outfits_button", style: "width: 90%;border-radius:3px;" %>
+</div>
+
+
+	<div class="col-md-6">
+	<div id="outfits_well" class="big-canvas" style="width: 100%;">
+	
+		<%= render 'outfits' %>
+
+	</div>
+
+		<%= will_paginate @items, id: "page_links", style: "margin-top: 0px;", class: "center-block text-center" %>
+
+
+		
+		<%= javascript_tag "var userId = #{params[:user_id]};" %>	
+		
+		<div id="dialog" title="Basic dialog">
+		</div>
+	</div>
+</div>

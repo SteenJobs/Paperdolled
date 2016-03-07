@@ -1,0 +1,29 @@
+<% provide(:title, "Gallery") %>
+
+		<div class="container" id="outfit_container">
+		<div class="jumbotron" id='main-jumbotron' style="padding-bottom: 0px; margin-bottom:0px;">
+			<%= render "layouts/main_navbar" %>
+		</div>
+			<div class="row">
+		<div class="col-md-8 col-md-offset-2 well" id="outfits_well2">
+		<% @items.each do |item| %>
+		<div class="col-md-2">
+		<div class="draggable3" data-item-id='<%= item.id %>'>
+				<%= image_tag item.picture, class: "imageUpload" %>	
+			<div class="item_info text-center">
+				<%= link_to item.name, item.link %>
+				<p>
+					<%= item.price %>
+				</p>
+			</div>
+		</div>
+		</div>
+			<% end %>
+		</div>
+		
+			<%= will_paginate @items, id: "item_links", class: "text-center" %>
+		
+		<div id="dialog2" title="Basic dialog">
+		</div>
+	</div>
+</div>

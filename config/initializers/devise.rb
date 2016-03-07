@@ -142,7 +142,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length.
-  config.password_length = 8..72
+  config.password_length = 4..72
 
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
@@ -230,7 +230,7 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  # config.navigational_formats = ['*/*', :html]
+  config.navigational_formats = ['*/*', :html, :json]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
@@ -239,8 +239,7 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :facebook, ENV["facebook_app_id"], ENV["facebook_app_secret"], 
-    :secure_image_url => true, :image_size => 'large'
+  config.omniauth :facebook, ENV["facebook_app_id"], ENV["facebook_app_secret"], callback_url: "/auth/facebook/callback", :secure_image_url => true, :image_size => 'large'
   
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
@@ -249,6 +248,10 @@ Devise.setup do |config|
   # config.warden do |manager|
   #   manager.intercept_401 = false
   #   manager.default_strategies(scope: :user).unshift :some_external_strategy
+  # end
+
+  # config.warden do |manager|
+  #   manager.failure_app = CustomFailure
   # end
 
   # ==> Mountable engine configurations

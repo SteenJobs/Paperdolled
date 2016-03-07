@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.1'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
+gem 'pg', '~> 0.15'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -26,16 +27,22 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Additional Gems
 gem 'devise'
 gem 'cancancan'
-gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'bootstrap-sass'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '1.4.0'
 gem 'figaro'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
 gem 'jquery-turbolinks'
+gem 'chosen-rails'
+gem "compass-rails", git: 'https://github.com/Compass/compass-rails', branch: 'master'
+gem 'bootstrap-datepicker-rails'
+gem 'jquery-ui-rails'
+gem 'yajl-ruby', require: 'yajl'
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
+gem 'httparty'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -50,12 +57,14 @@ group :development, :test do
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
+  gem 'pry'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'faker'
+  gem 'populator'
 end
   
 group :test do
@@ -65,7 +74,7 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
+  #gem 'pg'
   gem 'rails_12factor'
   gem 'puma'
 end

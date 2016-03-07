@@ -12,4 +12,75 @@
  *
  *= require_tree .
  *= require_self
+ *= require jquery-ui
+ *= require bootstrap-datepicker3
+ *= require bootstrap-editable.css
+ *= require chosen
  */
+
+
+
+/* Fonts */
+
+.josefin {
+	font-family: 'Josefin Slab', serif;
+	font-weight: 600;
+}
+
+.josefin-bold {
+	font-family: 'Josefin Slab', serif;
+	font-weight: 700;
+}
+
+/* Global styling */
+
+html, body {
+  min-height: 100%;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+body {
+    font-family: 'Josefin Slab', serif !important;
+    font-weight: 600 !important;
+    background: {
+    image: asset-url("background.png");
+    size: auto;
+    repeat: repeat;
+    position: center top;
+  }
+}
+
+p {
+	margin: 0 0 5px !important;
+}
+
+.pd-color {
+	color: #cabe97;
+}
+
+.paperdolled-button {
+  background-color: #cabe97 !important; 
+  border-color: transparent !important; 
+  color: white !important;//#af9b58 !important;
+}
+
+.paperdolled-button-outline {
+  background-color: transparent !important;
+  border-color: #cabe97 !important;
+  border-width: 2px !important;
+  color: #cabe97 !important;//#af9b58 !important;
+}
+
+.paperdolled-warning-button-outline {
+  background-color: transparent !important;
+  border-color: #d9534f !important;
+  border-width: 2px !important;
+  color: #d9534f !important;
+}
+
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import url(https://fonts.googleapis.com/css?family=Josefin+Slab:600,700);

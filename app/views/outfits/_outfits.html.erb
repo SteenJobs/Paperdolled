@@ -1,0 +1,29 @@
+	
+		<div class="well" style="height: 100%;, width: 100%;">
+		<% @items.in_groups_of(6, false).each do |group| %>
+		<div class="row" style="padding-left: 10px; padding-right:10px;">
+		<% group.each do |item| %>
+		<div class="col-md-2" style="padding: 0px;">
+		<div class="draggable" data-item-id='<%= item.id %>'>
+				<%= image_tag item.picture, class: "imageUpload" %>	
+    	<div class="ui-resizable-handle ui-resizable-nw" id="nwgrip"></div>
+    	<div class="ui-resizable-handle ui-resizable-ne" id="negrip"></div>
+    	<div class="ui-resizable-handle ui-resizable-sw" id="swgrip"></div>
+    	<div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
+    	<div class="ui-resizable-handle ui-resizable-n" id="ngrip"></div>
+    	<div class="ui-resizable-handle ui-resizable-s" id="sgrip"></div>
+    	<div class="ui-resizable-handle ui-resizable-e" id="egrip"></div>
+    	<div class="ui-resizable-handle ui-resizable-w" id="wgrip"></div>
+			<div class="item_info text-center">
+				<%= link_to item.name, item.link %>
+				<p>
+					<%= item.price %>
+				</p>
+			</div>
+		</div>
+			
+		</div>
+		<% end %>
+		</div>
+	<% end %>
+</div>

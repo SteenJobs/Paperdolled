@@ -1,3 +1,85 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#questions form > li {
+	display: inline-block;
+	padding-left: 10px;
+}
+
+div.chosen-container.chosen-container-single {
+	width: 150px !important;
+}
+
+#profile {
+	margin-top: 20px;
+}
+
+ul#questions {
+	padding-left: 0;
+}
+
+.each_scenario {
+	height: 250px;
+}
+
+.row {
+	padding-top: 30px;
+}
+
+#user_scenario {
+	margin-top: 20px;
+}
+
+.small_outfit_canvas {
+	width: 256px;//375px; 
+	height: 269px;//400px; 
+	border: 1px solid #000000;
+}
+
+#outfit_container {
+	margin-left: 10px;
+	margin-right: 10px;
+	width: 98.5%;
+}
+
+.small_draggable {
+    //border: 1px solid #000000;
+    overflow: visible;
+		display: inline-block;
+		margin-left: auto;
+		margin-right: auto;
+		position: relative;
+		padding: 0px;
+		width: 100% !important;
+		height: 100% !important;
+}
+
+.small_draggable2 {
+    //border: 1px solid #000000;
+    overflow: visible;
+		position: absolute !important;
+}
+
+
+
+
+
+.small_draggable img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	line-height: 0px;
+	position: relative;
+	vertical-align: top;
+}
+
+.small_draggable2 img {
+	width: 100%;
+	height: 100%;
+}
+
+img.imageUpload {
+	margin-left: 0px !important;
+	margin-right: 0px !important;
+}
