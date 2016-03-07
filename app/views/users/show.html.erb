@@ -1,3 +1,5 @@
+<% provide(:title, "Profile") %>
+
 <div class="container-fluid">
 	<div class="jumbotron" id='main-jumbotron'>
 		<%= render "layouts/main_navbar" %>
@@ -50,20 +52,20 @@
 						<hr style="border-color: #cabe97 !important; border-top: 2px solid; margin-top: 10px;">
 						<div class="row">
 						<div class="col-md-6">
-							<p>Age: <%= link_to(@user.age.nil? ? "Write something here!" : "#{@user.age}", "#", remote: true, :"data-url" => user_update_path(id: @user.id), id: :bio, :'data-name' => :age, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
-							<p>Style Likes: <%= link_to(@user.style_likes.nil? ? "Write something here!" : "#{@user.style_likes}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :style_likes, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
-							<p>Style Dislikes: <%= link_to(@user.style_dislikes.nil? ? "Write something here!" : "#{@user.style_dislikes}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :style_dislikes, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
-							<p>Style Icon: <%= link_to(@user.style_icon.nil? ? "Write something here!" : "#{@user.style_icon}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :style_icon, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
+							<p><span class="josefin-bold">Age: </span><%= link_to(@user.age.nil? ? "Write something here!" : "#{@user.age}", "#", remote: true, :"data-url" => user_update_path(id: @user.id), id: :bio, :'data-name' => :age, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
+							<p><span class="josefin-bold">Style Likes: </span><%= link_to(@user.style_likes.nil? ? "Write something here!" : "#{@user.style_likes}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :style_likes, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
+							<p><span class="josefin-bold">Style Dislikes: </span><%= link_to(@user.style_dislikes.nil? ? "Write something here!" : "#{@user.style_dislikes}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :style_dislikes, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
+							<p><span class="josefin-bold">Style Icon: </span><%= link_to(@user.style_icon.nil? ? "Write something here!" : "#{@user.style_icon}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :style_icon, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
 							<br>
-							<p>Event Location: <%= link_to(@user.event_location.nil? ? "-----" : "#{@user.event_location}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :event_location, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
+							<p><span class="josefin-bold">Event Location: </span><%= link_to(@user.event_location.nil? ? "-----" : "#{@user.event_location}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :event_location, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
 						</div>
 						<div class="col-md-6">
-							<p>Event: <%= @scenario["Event"] %></p>
-							<p>And: <%= @scenario["And"] %></p>
-							<p>Also: <%= @scenario["Also"] %></p>
-							<p>With: <%= @scenario["With"] %></p>
-							<p>Date: <%= @scenario["Date"] %></p>
-							<p>Other: <%= @scenario["Other"] %></p>
+							<p><span class="josefin-bold">Event: </span><%= @scenario["Event"] %></p>
+							<p><span class="josefin-bold">And: </span><%= @scenario["And"] %></p>
+							<p><span class="josefin-bold">Also: </span><%= @scenario["Also"] %></p>
+							<p><span class="josefin-bold">With: </span><%= @scenario["With"] %></p>
+							<p><span class="josefin-bold">Date: </span><%= @scenario["Date"] %></p>
+							<p><span class="josefin-bold">Other: </span><%= @scenario["Other"] %></p>
 						</div>
 						</div>
 						<div class="row">

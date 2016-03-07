@@ -1,5 +1,4 @@
 
-<!-- header -->
 <% provide(:title, "Users") %>
 
 
@@ -27,20 +26,10 @@
 					</div>		
 					<br>
 					<% scenario = User.list_answers(user) %>
-					<!--<% scenario.each do |answer| %>							
-						<%= answer %>
-						<br>								
-					<% end %>																	
-					-->
-						<p>
-							Event: <%= scenario["Event"] %>
-						</p>
-						<p>
-							Event Location: -----
-						</p>
-						<p>
-							Date: <%= scenario["Date"] %>
-						</p>
+
+					<p><span class="josefin-bold">Event: </span><%= scenario["Event"] %></p>
+					<p><span class="josefin-bold">Event Location: </span><%= user.event_location? ? user.event_location : '-----' %></p>
+					<p><span class="josefin-bold">Date: </span><%= scenario["Date"] %></p>
 										
 					<br>
 					<%= link_to "Doll me up", new_user_outfit_path(user), class: "btn btn-default paperdolled-button", style: "width:40%;" %>

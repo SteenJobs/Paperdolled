@@ -2,25 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.paperdolled-button {
-  background-color: #cabe97 !important; 
-  border-color: transparent !important; 
-  color: white !important;//#af9b58 !important;
-}
 
-.paperdolled-button-outline {
-  background-color: transparent !important;
-  border-color: #cabe97 !important;
-  border-width: 2px !important;
-  color: #cabe97 !important;//#af9b58 !important;
-}
-
-.paperdolled-warning-button-outline {
-  background-color: transparent !important;
-  border-color: #d9534f !important;
-  border-width: 2px !important;
-  color: #d9534f !important;
-}
 
 li.active > .sign-in-button {
   background-color: #cabe97 !important; 
@@ -57,20 +39,9 @@ li > .sign-in-button {
   position: relative;
 }
 
-
-
 #create_link {
 	border-right: 1px solid black;
 	border-left: 1px solid black;
-}
-
-body {
-  background: {
-    image: asset-url("background.png");
-    size: auto;
-    repeat: repeat;
-    position: center top;
-  }
 }
 
 .registrations.new {
@@ -86,17 +57,6 @@ body {
 #main-jumbotron {
     background-color: transparent;
 }
-
-/*
-.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
-  background-color:#da8e81;
-  //color:yourLinkColor;
-}
-
-.nav-pills>li>a, .nav-pills>li>a:hover, .nav-pills>li>a:focus{
-    color: #da8e81;
-  }
-*/
 
 .main-nav-buttons {
     color: #978b64 !important;
@@ -126,20 +86,12 @@ button.btn.btn-default.main-nav-buttons.active {
     color: white !important;
 }
 
-html, body {
-  min-height: 100%;
-  height: 100%;
-  width: 100%;
-  overflow: auto;
-}
-
 .login-panel::before {
   //overflow: auto;
   height: 100%;
   width: 100%;
   min-height: 100%;
 }
-
 
 .main-nav-group {
     border-top-style: solid;

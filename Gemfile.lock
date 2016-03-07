@@ -60,9 +60,6 @@ GEM
       execjs
       json
     bcrypt (3.1.10)
-    best_in_place (3.0.3)
-      actionpack (>= 3.2)
-      railties (>= 3.2)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-datepicker-rails (1.4.0)
@@ -225,17 +222,15 @@ GEM
     formatador (0.2.5)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
-    gon (5.2.3)
-      actionpack (>= 2.3.0)
-      json
-      multi_json
-      request_store (>= 1.0.5)
     guard-compat (1.2.1)
     guard-minitest (2.4.4)
       guard-compat (~> 1.2)
       minitest (>= 3.0)
     hashie (3.4.3)
     hike (1.2.3)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     httpauth (0.2.1)
     i18n (0.7.0)
     inflecto (0.0.2)
@@ -273,6 +268,7 @@ GEM
       minitest (>= 5.0)
       ruby-progressbar
     multi_json (1.11.1)
+    multi_xml (0.5.5)
     multipart-post (2.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -339,11 +335,6 @@ GEM
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     rdoc (4.2.0)
-    redactor-rails (0.5.0)
-      devise
-      mime-types
-      orm_adapter
-    request_store (1.1.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     ruby-progressbar (1.7.5)
@@ -393,7 +384,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  best_in_place
   bootstrap-datepicker-rails
   bootstrap-sass
   bootstrap-will_paginate
@@ -408,8 +398,8 @@ DEPENDENCIES
   faker
   figaro
   fog
-  gon
   guard-minitest
+  httparty
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
@@ -424,7 +414,6 @@ DEPENDENCIES
   puma
   rails (= 4.2.1)
   rails_12factor
-  redactor-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
