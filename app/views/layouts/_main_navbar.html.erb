@@ -1,13 +1,21 @@
 
 
-  	<h2 class='text-center', style="color: black;">Paperdolled</h2>
+  	<h2 class='text-center josefin-bold', style="color: #978b64; font-size: 40px;">Paperdolled</h2>
   	<br>
 	<div class="btn-group btn-group-justified main-nav-group" role="group" aria-label="...">
 	  <div class="btn-group" role="group">
-	  	<%= link_to(users_path) do %>
-	    	<button type="button" class="btn btn-default main-nav-buttons">
-	    		HOME
-	    	</button>
+	  	<% if current_user.present? %>
+	  		<%= link_to(users_path) do %>
+	    		<button type="button" class="btn btn-default main-nav-buttons">
+	    			HOME
+	    		</button>
+	    	<% end %>
+	    <% else %>
+	    	<%= link_to(root_path) do %>
+	    		<button type="button" class="btn btn-default main-nav-buttons">
+	    			SIGN IN
+	    		</button>
+	    	<% end %>
 	    <% end %>
 	  </div>
 	  <div class="btn-group" role="group">

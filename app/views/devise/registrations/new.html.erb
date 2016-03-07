@@ -1,27 +1,28 @@
+
 <%= render 'facebook' %>
 
-<div class="container-fluid">
 
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <h1><span>Welcome to <strong>PAPERDOLLED</strong></span></h1>
-        </div>
+
+    <div class="container-fluid">
+    <div class="jumbotron" id='main-jumbotron' style="padding-top: 15px;">
+        <%= render "layouts/main_navbar" %>
     </div>
-
+    </div>
+<div class="container-fluid" style="padding-top: 0px; position: relative;">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <div class="center-block text-center">
             <div class="login-panel">
-                <div class="panel panel-default">
+                <div class="panel panel-default" style="background-color: transparent; border-color: black; border-width: 2px;">
                     
                     <div class="panel-body">
                     
                         <ul class="nav nav-pills nav-justified" role="tablist">
-                            <li role="presentation" class="active">
-                                <a href="#sign-in" aria-controls="sign-in" role="tab" data-toggle="pill">Sign In</a>
+                            <li role="presentation" class="active" style="padding-right: 2px;">
+                                <a href="#sign-in" aria-controls="sign-in" role="tab" data-toggle="pill" class="sign-in-button">Sign In</a>
                             </li>
-                            <li role="presentation">
-                                <a href="#sign-up" aria-controls="sign-up" role="tab" data-toggle="pill">Sign Up</a>
+                            <li role="presentation" style="padding-left: 2px;">
+                                <a href="#sign-up" aria-controls="sign-up" role="tab" data-toggle="pill" class="sign-in-button">Sign Up</a>
                             </li>
                         </ul>
 
@@ -46,7 +47,7 @@
                                             <% end -%>
       
                                             <div class="form-group">
-                                                <%= f.submit "Log in", id: "login-submit", class: "form-control btn btn-login", style: "background-color: #dc8e7f; border-width: 0px;" %>
+                                                <%= f.submit "Log in", id: "login-submit", class: "form-control btn btn-login paperdolled-button", style: "border-width: 0px;" %>
                                             </div>
                                         <% end %>
 
@@ -57,10 +58,9 @@
                                         the JavaScript SDK to present a graphical Login button that triggers
                                         the FB.login() function when clicked.
                                         -->
-                                        <div style="margin: 0 auto 0 auto; width: 200px;">
+                                        
                                         <div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" onlogin="checkLoginState();"></div>
                                         
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                                                 </div>
                                                 <!-- <%= f.hidden_field :bio, name: "user[bio]", :value => "Describe yourself!" %> -->
                                                 <div class="form-group">        
-                                                    <%= f.submit "Sign Up", name: 'commit', id: "register-submit", tabindex: "4", class: "form-control btn btn-register", style: "background-color: #dc8e7f; border-width: 0px;" %>
+                                                    <%= f.submit "Sign Up", name: 'commit', id: "register-submit", tabindex: "4", class: "form-control btn btn-register paperdolled-button", style: "border-width: 0px;" %>
                                                 </div>
                                         <% end %>
                                     </div>

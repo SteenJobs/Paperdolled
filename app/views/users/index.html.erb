@@ -21,7 +21,7 @@
 				<div class="col-md-4">
 				
 					<h5><%= user.first_name + " " + user.last_name %></h5>
-					<hr style="border-color: black;">
+					<hr style="border-color: #cabe97 !important; border-top: 2px solid; margin-top: 10px;">
 					<div class="center-block">
 						<%= link_to user.picture? ? image_tag(user.picture, style: "height: auto; width: 100%; max-width: 360px; max-height: 360px;") : image_tag("http://placehold.it/300x300", style: "height: auto; width: 100%; max-width: 360px; max-height: 360px;"), user_path(user), class: "img-responsive" %>
 					</div>		
@@ -43,7 +43,7 @@
 						</p>
 										
 					<br>
-					<%= link_to "Doll me up", new_user_outfit_path(user), class: "btn btn-default", style: "background-color: #cabe97; border-color: transparent; color: #af9b58; width:40%;" %>
+					<%= link_to "Doll me up", new_user_outfit_path(user), class: "btn btn-default paperdolled-button", style: "width:40%;" %>
 														
 				</div>
 			<% end %>

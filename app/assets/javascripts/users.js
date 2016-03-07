@@ -63,12 +63,20 @@ $(document).ready(function () {
     //turn to inline mode
     $.fn.editable.defaults.mode = 'inline';
     $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
-    $("#bio, #age, #styleLikes, #styleDislikes, #styleIcon").editable({
+    $("#bio, #age, #styleLikes, #styleDislikes, #styleIcon, #eventLocation").editable({
         send: 'always',
         ajaxOptions: {
             type: 'put',
             dataType: 'html'
         },
+        params: function (params) {
+            var name = params.name
+            var value = params.value
+            params = {'user': {}, 'bio': true}
+            params.user[name] = value
+            console.log(params)
+            return params;
+        }, 
         success: function(response, newValue) {
             if(response.status == 'error') return response.msg; //msg will be shown in editable form
         },

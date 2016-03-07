@@ -18,3 +18,34 @@
  *= require bootstrap-editable.css
  *= require chosen
  */
+
+
+
+/* Fonts */
+
+.josefin {
+	font-family: 'Josefin Slab', serif;
+	font-weight: 600;
+}
+
+.josefin-bold {
+	font-family: 'Josefin Slab', serif;
+	font-weight: 700;
+}
+
+/* Global styling */
+
+body {
+    font-family: 'Josefin Slab', serif !important;
+    font-weight: 600 !important;
+}
+
+p {
+	margin: 0 0 5px !important;
+}
+
+
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import url(https://fonts.googleapis.com/css?family=Josefin+Slab:600,700);

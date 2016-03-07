@@ -14,14 +14,15 @@
 						  Log Out
 						</button>
 						<% end %>
-						<hr style="border-color: black;">
+						<hr style="border-color: #cabe97 !important; border-top: 2px solid; margin-top: 10px;">
 						
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
 			  			<%= @user.picture? ? image_tag(@user.picture, style: "height: auto; width: 100%; max-width: 550px; max-height: 550px;") : image_tag("http://placehold.it/300x300", style: "height: auto; width: 100%; max-width: 550px; max-height: 550px; margin: 0px;")%>
-			  			<br>
+
+			  			<br><br>
 
 			  			<button type="button" class="btn btn-primary paperdolled-button-outline center-block" id="upload-button">
 						  Upload
@@ -45,8 +46,8 @@
 		  				</div>
 					</div>
 					<div class="col-md-6">
-						<h5><strong><%= @user.first_name + " " + @user.last_name %></strong></h5>
-						<hr style="border-color: black;">
+						<h4 class="josefin-bold"><%= @user.first_name + " " + @user.last_name %></h4>
+						<hr style="border-color: #cabe97 !important; border-top: 2px solid; margin-top: 10px;">
 						<div class="row">
 						<div class="col-md-6">
 							<p>Age: <%= link_to(@user.age.nil? ? "Write something here!" : "#{@user.age}", "#", remote: true, :"data-url" => user_update_path(id: @user.id), id: :bio, :'data-name' => :age, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
@@ -54,6 +55,7 @@
 							<p>Style Dislikes: <%= link_to(@user.style_dislikes.nil? ? "Write something here!" : "#{@user.style_dislikes}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :style_dislikes, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
 							<p>Style Icon: <%= link_to(@user.style_icon.nil? ? "Write something here!" : "#{@user.style_icon}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :style_icon, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
 							<br>
+							<p>Event Location: <%= link_to(@user.event_location.nil? ? "-----" : "#{@user.event_location}", "#", remote: true, :"data-url" => user_update_path, id: :bio, :'data-name' => :event_location, :"data-type" => "text", :"data-disabled" => @disabled, style: "border-bottom: none; color: black; font-size: 14px;") %></p>
 						</div>
 						<div class="col-md-6">
 							<p>Event: <%= @scenario["Event"] %></p>
@@ -66,7 +68,7 @@
 						</div>
 						<div class="row">
 						<div class="col-md-6">
-							<%= link_to "Doll me up", new_user_outfit_path(@user), class: "btn btn-default", style: "background-color: #cabe97; border-color: transparent; color: #af9b58; width:55%;" %>
+							<%= link_to "Doll me up", new_user_outfit_path(@user), class: "btn btn-default paperdolled-button", style: "width:55%;" %>
 						</div>
 						<div class="col-md-6">
 							<% if can? :update, @user %>

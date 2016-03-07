@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << [:first_name, :last_name, :picture, :picture_cache]
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:first_name, :last_name, :picture, :picture_cache, :bio, :redactor) }
+    devise_parameter_sanitizer.for(:account_update).push(:first_name, :last_name, :picture, :picture_cache, :bio, :redactor, :event_location, :age, :style_likes, :style_dislikes, :style_icon)
   end
   
 end

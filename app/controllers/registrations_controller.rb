@@ -17,6 +17,8 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     build_resource(sign_up_params)
+
+    # If user tries creating account after logging in with Facebook OAuth
     if User.where(email: resource.email).exists? && User.where(email: resource.email).first.uid != nil
       user = User.where(email: resource.email).first
       user.send_reset_password_instructions
@@ -48,7 +50,9 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
   
+=begin  
   def update
+    binding.pry
     user = params.key?(:id) ? User.find(params[:id]) : resource
     authorize! :update, user
     valid_param = false
@@ -72,10 +76,14 @@ class RegistrationsController < Devise::RegistrationsController
       when "style_icon"
         account_update_params = {:style_icon => params[:value]}
         valid_param = true
+      when "event_location"
+        params.merge!({:account_update => {:event_location => params[:value]}})
+        puts params
+        valid_param = true
       end
     end
-    sanitized_params = account_update_params()
-    resource_updated = update_resource(resource, sanitized_params)
+    
+    resource_updated = update_resource(resource, account_update_params)
     yield resource if block_given?
     if resource_updated
       if is_flashing_format?
@@ -94,7 +102,33 @@ class RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
   end    
-    
+=end
+
+  def update
+    is_bio_param = params[:bio] == "true" if params.key?(:bio)
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+    prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+    binding.pry
+    resource_updated = update_resource(resource, account_update_params)
+    yield resource if block_given?
+    if resource_updated
+      if is_flashing_format?
+        flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ?
+          :update_needs_confirmation : :updated
+        set_flash_message :notice, flash_key
+      end
+      sign_in resource_name, resource, bypass: true
+      if is_bio_param
+        return head :ok
+      else
+        respond_with resource, location: after_update_path_for(resource)
+      end
+    else
+      clean_up_passwords resource
+      respond_with resource
+    end
+  end
+
   protected
   
     def after_update_path_for(resource)
@@ -102,9 +136,12 @@ class RegistrationsController < Devise::RegistrationsController
     end
     
     def update_resource(resource, params)
+      puts params
+      binding.pry
       if ((params.key?(:email)) && (params[:email] != resource.email)) || (params.key?(:password) && !params[:password].blank?) || (params.key?(:password_confirmation) && !params[:password_confirmation].blank?)
         resource.update_with_password(params)
       else
+        binding.pry
         params.delete(:current_password) if params.key?(:current_password)
         resource.update_without_password(params)
       end

@@ -14,9 +14,9 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui
+//= require bootstrap
 //= require best_in_place
 //= require chosen-jquery
-//= require bootstrap-sprockets
 //= require redactor-rails
 //= require bootstrap-datepicker
 //= require masonry.pkgd.min.js

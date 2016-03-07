@@ -33,7 +33,6 @@ class User < ActiveRecord::Base
       existing_user = self.where(email: auth.info.email).first
       existing_user.provider = auth.provider
       existing_user.uid = auth.uid
-      binding.pry
       existin_user.remote_picture_url = auth.info.image if existing_user.picture.blank?
     else
       existing_user = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -41,7 +40,6 @@ class User < ActiveRecord::Base
         user.password = Devise.friendly_token[0,20]
         user.first_name = auth.info.first_name   # assuming the user model has a name
         user.last_name = auth.info.last_name
-        binding.pry
         user.remote_picture_url = auth.info.image # assuming the user model has an image
       end
     end
