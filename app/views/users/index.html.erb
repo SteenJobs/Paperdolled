@@ -22,7 +22,7 @@
 					<h5><%= user.first_name + " " + user.last_name %></h5>
 					<hr style="border-color: #cabe97 !important; border-top: 2px solid; margin-top: 10px;">
 					<div class="center-block">
-						<%= link_to user.picture? ? image_tag(user.picture, style: "height: 100%; width: auto; max-width: 360px; max-height: 360px;") : image_tag("http://placehold.it/300x300", style: "height: 100%; width: auto; max-width: 360px; max-height: 360px;"), user_path(user), class: "img-responsive" %>
+						<%= link_to user.picture? ? image_tag(user.picture, style: "height: auto; width: 100%; max-width: 360px; max-height: 360px;") : image_tag("http://placehold.it/300x300", style: "height: auto; width: 100%; max-width: 360px; max-height: 360px;"), user_path(user), class: "img-responsive" %>
 					</div>		
 					<br>
 					<% scenario = User.list_answers(user) %>
