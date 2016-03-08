@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Additional Gems
-gem 'devise'
+gem 'devise', '~> 3.5.3'
 gem 'cancancan'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
