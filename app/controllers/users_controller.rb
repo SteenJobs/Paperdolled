@@ -15,7 +15,6 @@ class UsersController < ApplicationController
     @answer = Answer.new
     @options = Option.all
     @outfits = Outfit.where(styled_id: @user.id)
-    @stylist = User.where(id: @outfits.stylist_id).first
     @disabled = @user == current_user ? false : true
   end
 end

@@ -128,7 +128,7 @@
 				</div>
 			<% end %>
 				<p style="color:<%= cycle('white', 'white', 'white', 'black', 'black', 'black') -%>;">
-					Stylist: <%= link_to '#{outfit.stylist.first_name} #{outfit.stylist.last_name}', user_path(@stylist) %>
+					Stylist: <%= link_to '#{outfit.stylist.first_name} #{outfit.stylist.last_name}', user_path(outfit.stylist_id) %>
 				</p>
 			</div>
 		<% end %>
