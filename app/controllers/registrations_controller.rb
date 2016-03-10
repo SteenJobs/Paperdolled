@@ -11,6 +11,7 @@ class RegistrationsController < Devise::RegistrationsController
     # If user tries creating account after logging in with Facebook OAuth
     if User.where(email: resource.email).exists? && User.where(email: resource.email).first.uid != nil
       user = User.where(email: resource.email).first
+      flash[:danger] = "You've already created an account using Facebook!  If you'd like to create a manual login, we've sent you an email so you can reset your password."
       user.send_reset_password_instructions
       redirect_to new_user_registration_path
       return
